@@ -1,0 +1,4 @@
+1. Reporter Exists 
+2. Report allowed [valid reporter, and type of keyword available]
+3. Just use checker at this level, Codes exists and none is missing
+4. store the report 

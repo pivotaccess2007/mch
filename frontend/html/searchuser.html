@@ -1,0 +1,57 @@
+{%  extends "novabase.html" %}
+{%  block title %}Users{%  endblock  %}
+{%  block subtitle %} Search User {%  endblock  %}
+
+{% block menu %}
+ 	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>     
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus = ["group"]) }}'>Search User</a></li>
+
+{% endblock %}
+
+
+{%  block mainpart  %}
+  
+	<div id="Form1Layout">
+	<form method="POST" action="{{ nav.link('/tables/userdash')}}" >
+	<label><b>Search user by: </b></label>
+	<select name="search">
+		<option value=""></option>
+		<option value="nid">National ID</option>
+		<option value="sim">Telephone</option>
+	</select>
+	</br>
+	</br>
+	<label>Enter search value:</label><input type="text" name="identity" value="{{display.nid}}" />
+	</br> 
+	<label id="ntayo">&nbsp;</label>
+	<input type="submit" name="sim" value="Go" class="My_Button"/>
+	</form>
+	</div>
+ 
+  
+
+{%  endblock  %}

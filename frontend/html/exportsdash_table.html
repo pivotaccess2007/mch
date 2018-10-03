@@ -1,0 +1,58 @@
+{%  extends "novabase.html" %}
+{%  block title %}Download{%  endblock  %}
+{%  block subtitle %} Download files {%  endblock  %}
+
+{% block menu %}
+ 	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("exportsdash", view= "graphic", minus=["id", "pid", "export"]) }}'><span>Download files</span></a>
+          </li>  
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("exportsdash", view= "graphic", minus = ["group", "export"]) }}'>Download files</a></li>
+
+{% endblock %}
+
+
+{%  block mainpart  %}
+
+	<div class="smallcontainer" style="padding-top:50px;">
+
+	    <img class="icon" src="{{  static_path }}/images/download.png" />
+	    
+
+	</div>
+	<div class="module humblecontainer">		
+  		<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">
+			Current exports
+		</div>
+		
+		{% if not display.download %}
+			<h4 style="color:red;"> &#187; No current export found</h4>
+			<label>{{ display.message }}</label></br></br>
+		{%else%}
+			{% if display.message %}
+			<h4> &#187; {{ display.message }}</h4>
+			{% endif %}
+			<label><b>Filename:</b> </label><label>{{ display.download.filename }}</label></br></br>
+			<label><b>Description: </b></label><label>{{ display.download.description }}</label></br></br>
+			<label><b>Status: </b></label><label>{{ display.download.status }}</label></br></br>
+			<label><b>Download link: </b></label>
+			<label class="moretotal"><img class="icon" src="{{  static_path }}/images/download.png" width="20px" />
+			<a href="{{ nav.link('/dashboards/exportsdash', download=display.download.indexcol, minus=['export'] )}}">
+				Download file
+			</a>
+			
+			</label>
+			
+			</br></br>
+			
+		{% endif %}
+
+		
+
+	</div>
+
+	{%  include "basictable.html"  %}
+
+{%  endblock  %}

@@ -1,0 +1,9 @@
+DROP TABLE messagelog_message;
+DROP TABLE rapidsms_connection;
+DROP TABLE rapidsms_contact;
+DROP TABLE rapidsms_backend;
+DROP TABLE rapidsms_app;
+
+
+
+

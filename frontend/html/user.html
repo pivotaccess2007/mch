@@ -1,0 +1,84 @@
+{%  extends "novabase.html" %}
+{%  block title %}Users{%  endblock  %}
+{%  block subtitle %} User {%  endblock  %}
+
+{% block menu %}
+ 	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>     
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus = ["group"]) }}'>User</a></li>
+
+{% endblock %}
+
+
+{%  block mainpart  %}
+  
+	<div id="Form1Layout">
+	<h4 style="color:blue;"> {{display.message}}</h4>
+	<label><b>Surname: </b></label> <label><b>{{display.user.surname}}</b></label>	
+	</br>
+	</br>
+	<label><b>Given Name: </b></label> <label><b>{{display.user.given_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>National ID: </b></label> <label><b>{{display.user.national_id}}</b></label>	
+	</br>
+	</br>
+	<label><b>Telephone: </b></label> <label><b>{{display.user.telephone}}</b></label>	
+	</br>
+	</br>
+	<label><b>Role: </b></label> <label><b>{{display.user.role_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Province: </b></label> <label><b>{{display.user.province_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>District: </b></label> <label><b>{{display.user.district_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Referral Facility: </b></label> <label><b>{{display.user.referral_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Facility: </b></label> <label><b>{{display.user.facility_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Sector: </b></label> <label><b>{{display.user.sector_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Cell: </b></label> <label><b>{{display.user.cell_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Village: </b></label> <label><b>{{display.user.village_name}}</b></label>	
+	</br>
+	</br>
+	<label><b>Is Active: </b></label> <label><b>{{display.user.is_active|get_display}}</b></label>	
+	</br>
+	</br>
+	
+	</div>
+ 
+  
+
+{%  endblock  %}

@@ -1,0 +1,210 @@
+{%  extends "novabase.html" %}
+{%  block title %}Ambulances{%  endblock  %}
+{%  block subtitle %} Ambulances {%  endblock  %}
+
+{% block menu %}
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("chwamb", view= "graphic", minus = ["group"]) }}'>Ambulances</a></li>
+{% if group %}
+<li> &#187; {{ group }}</li>
+{% endif %}
+{% endblock %}
+
+
+{%  block mainpart  %}
+<div class="smallcontainer" style="padding-top:50px;">
+
+	 <img class="icon" src="{{  static_path }}/images/ambulance.png" />
+    <div class="infoname" style="font-size: 20px;">Total Number of Ambulances</div>
+    <div class="moretotal" ><a href="{{ nav.link('/tables/ambulance', summary = 'on')}}">View by Location</a></div>
+    <div class="infodata goodnum">
+      <a href="{{ nav.link('/tables/ambulance')}}">{{display.nat[0]['total']|neat_numbers}}</a>
+    </div>
+
+
+
+  </div>
+  </div>
+  
+  <div class="humblecontainer">
+  
+<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">New ambulance registration form</div>
+  <form method="POST" class="regform">
+	{% if display.message %}
+		<label style="color:blue;">{{display.message}}</label>
+	{%endif%}
+	<br><br>
+
+	<label id="coord">Name Of Coordinator/Driver: </label>
+	<input type="text" name="coordinator" id="coordinator" value="" class="ac_input">
+	<br><br>
+	<label id="tel">Telephone: </label>
+	<input type="text" name="telephone_moh" id="telephone_moh" value="" class="ac_input">
+	<br><br>
+	<label> Province: </label>
+	<input type="hidden" name="amb_nation" id="amb_nation" value="" />
+	<select name="amb_province" id="amb_province"> <option></option>
+	{% for prv in  display.locs['provinces'] %}<option value="{{prv.province_pk}}">{{prv.province_name}} </option> {%endfor%} 
+	</select>
+	<br><br>
+
+	<label> District: </label>
+	<select name="amb_district" id="amb_district"> <option></option>
+	{% for dst in  display.locs.districts %}<option value="{{dst.district_pk}}">{{dst.district_name}} </option> {%endfor%} 
+	</select>
+	<br><br>
+
+	<label id="referral">Referral Hospital: </label>
+	<select name="amb_hospital" id="amb_hospital"><option></option>
+	{% for hd in  display.locs.hospitals %}<option value="{{hd.referral_facility_pk}}" >{{hd.referral_name}} </option> {%endfor%}
+	</select> 
+	<br><br>
+
+	<label >Health Center: </label>
+	<select name="amb_facility" id="amb_facility"><option></option>
+	{% for fac in  display.locs.hcs %}<option value="{{fac.indexcol}}" >{{fac.name}} </option> {%endfor%}
+	</select> 
+	<br><br>
+	<input type="button"  onClick="return PassCheck(this.form);" value="Register" />
+  </form>
+
+
+  </div>
+
+<script type="text/javascript">
+
+//AMB autocomplete
+$().ready(function() {
+//alert("OK");
+$.getJSON( "/filter_locs", {loctype: "prv", locparentid: 1}, function( result ){
+				//alert(JSON.stringify(result));
+				document.getElementById("amb_province").options.length=0;
+				for ( var i=0; i<result.length; i++ ){
+							province = result[i];							
+							document.getElementById('amb_province').options[i+1] = new Option(
+									province.name, province.indexcol);
+							}
+		});
+
+
+$('#amb_province').change(function(evt){   
+		var value = $(this).attr('value'); // alert("PRV: " + value);
+		var selected_dsts = _.filter(districts, function(item) { 
+							//alert( value+", "+ item.province_pk+", "+ item.nation_pk +", "+ item.district_pk)
+									document.getElementById('amb_nation').value = item.nation_pk;
+									 return item.province_pk == value;  }); 
+		//alert(JSON.stringify(selected_dsts));
+		//alert(selected_dsts.length);
+		document.getElementById("amb_district").options.length=0;
+		for ( var i=0; i<selected_dsts.length; i++ ){ 
+				dst = selected_dsts[i];
+				document.getElementById('amb_district').options[i+1] = new Option(dst.district_name, dst.district_pk);
+							}
+
+		});
+
+$('#amb_district').change(function(evt){   
+		var value = $(this).attr('value');  //alert("DIST: " + value);
+		$.getJSON( "/filter_locs", {loctype: "sec", locparentid: value}, function( result ){
+				//alert(JSON.stringify(result));
+				document.getElementById("amb_sector").options.length=0;
+				for ( var i=0; i<result.length; i++ ){
+							sector = result[i];							
+							document.getElementById('amb_sector').options[i+1] = new Option(
+									sector.name, sector.indexcol);
+							}
+		}); 
+		
+		var selected_hps = _.filter(hps, function(item) {  return item.district_pk == value;  }); 
+		//alert(JSON.stringify(selected_hps));
+		document.getElementById("amb_hospital").options.length=0;
+		for ( var i=0; i<selected_hps.length; i++ ){ 
+				hd = selected_hps[i];
+			document.getElementById('amb_hospital').options[i+1] = new Option(hd.referral_name, hd.referral_facility_pk);
+							}
+		
+		});
+
+$('#amb_hospital').change(function(evt){   
+		var value = $(this).attr('value');  
+		var selected_hcs =_.filter(locations, function(item) {  return item.referral_facility_pk == value;  }); 
+		//alert(JSON.stringify(selected_hcs));
+		document.getElementById("amb_facility").options.length=0;
+		for ( var i=0; i<selected_hcs.length; i++ ){ //alert("HD: " + value);
+						hc = selected_hcs[i];
+						document.getElementById('amb_facility').options[i+1] = new Option(hc.name, hc.indexcol);
+							}
+
+		});
+
+
+
+
+});
+
+
+
+function PassCheck(form1)
+	{ 
+	if(form1.telephone_moh.value=="" || form1.telephone_moh.value.indexOf("078") < 0 || form1.telephone_moh.value.replace("+25","").length != 10 || isNaN(form1.telephone_moh.value.replace("+25",""))  )
+	{
+	alert("Get in the Valid Telephone Number please.");
+		form1.telephone_moh.focus();
+		return false;
+	}
+	
+	else if( form1.amb_province.value == "" || isNaN(form1.amb_province.value))
+	{
+	alert("Select province.");
+	form1.amb_province.focus();
+	return false;
+	}
+	else if( form1.amb_district.value == "" || isNaN(form1.amb_district.value))
+	{
+	alert("Select district.");
+	form1.amb_district.focus();
+	return false;
+	}
+	else if( form1.amb_hospital.value == "" || isNaN(form1.amb_hospital.value))
+	{
+	alert("Select Referral Hospital.");
+	form1.amb_hospital.focus();
+	return false;
+	}
+	else if(form1.amb_facility.value=="" || isNaN(form1.amb_facility.value))
+	{
+	alert("Select Health Center");
+	form1.amb_facility.focus();
+	return false;
+	}
+	else
+	{
+		form1.submit();
+	}
+    }
+</script>
+{%  endblock  %}

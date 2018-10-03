@@ -1,0 +1,614 @@
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0788660270130918+09.03.2018+16.09.2018+2+1+gs+yg+ol+ma+hc+wt58.5+ht159+to+hw+MUAC12.6'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+1234567890123457+09.05.2018+26.11.2018+2+1+gs+yg+ol+af+ja+hc+wt80+ht179.6+to+hw+MUAC21.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+1234567890123456+09.04.2018+11.10.2018+4+1+gs+yg+ol+ma+di+vo+hc+wt60.5+ht160+to+hw+MUAC14'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=ANC+0788660270130918+16.09.2018+ANC2+ja+ma+hc+wt68.5+MUAC13.6'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=ANC+1234567890123457+09.09.2018+ANC2+af+ja+hc+wt80+MUAC21.3'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=ANC+1234567890123456+11.09.2018+ANC2+ma+di+vo+hc+wt61.5+MUAC14.3'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+0788660270130918'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+1234567890123457'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+1234567890123456'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=REF+0788660270130918'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=REF+1234567890123457'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=REF+1234567890123456'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RED+0788660270130918+un+pa+ho+wt68.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RED+1234567890123457+co+he+or+wt80'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RED+1234567890123456+la+ps+sc+ho+wt61.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RISK+0788660270130918+ma+vo+ho+wt68.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RISK+1234567890123457+pc+oe+or+wt80'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RISK+1234567890123456+sa+rb+ds+ho+wt61.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RAR+0788660270130918+un+pa+ho+AL+MW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RAR+1234567890123457+co+he+or+AT+ms'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RAR+1234567890123456+la+ps+sc+ho+nA+ms'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RES+0788660270130918+ma+vo+ho+AA+MW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RES+1234567890123457+pc+oe+or+pr+ms'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RES+1234567890123456+sa+rb+ds+ho+pr+mW'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=BIR+0788660270130918+01+16.09.2018+GI+np+hc+nb+wt3.6'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=BIR+1234567890123457+02+17.09.2018+BO+ci+or+bf1+wt3.4'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=BIR+1234567890123456+01+15.09.2018+gi+cm+rb+hp+nb+wt2.8'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PNC+0788660270130918+PNC2+YEGO+16.09.2018+ns+aa+ms'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PNC+1234567890123457+pnc2+OYA+17.09.2018+ch+pr+mw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PNC+1234567890123456+PNC2+yego+15.09.2018+oe+hy+pr+ms'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=NBC+0788660270130918+01+NBC2+yego+16.09.2018+yego+np+EBF+AA+CW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=NBC+1234567890123457+02+nbc2+oya+17.09.2018+oYa+cm+rb+ebf+pr+cw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=NBC+1234567890123456+01+nbc2+YEGo+15.09.2018+yego+NP+nb+aa+cs'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+0788660270130918+01+16.09.2018'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+1234567890123457+02+17.09.2018'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DEP+1234567890123456+01+15.09.2018'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RED+0788660270130918+01+16.09.2018+wu+ho+wt3.6'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=red+1234567890123457+02+17.09.2018+lbt+or+wt3.4'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RED+1234567890123456+01+15.09.2018+con+HO+wt2.8'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RAR+0788660270130918+01+16.09.2018+wu+ho+AL+CW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=rar+1234567890123457+02+17.09.2018+lbt+or+NA+cs'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=RAR+1234567890123456+01+15.09.2018+con+HO+AT+CW'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+0788660270130918+01+16.09.2018+v3+vi+np+hc+wt4.6+MUAc7'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+1234567890123457+02+17.09.2018+v1+VC+ci+ho+wt4.4+muac7.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+1234567890123456+01+15.09.2018+v3+Vi+cm+rb+hp+wt3.8+MUAC6.3'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+0788660270130918+01+16.09.2018+NV+hc+wt4.6+MUAc7'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+1234567890123457+02+17.09.2018+Nv+ho+wt4.4+muac7.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CHI+1234567890123456+01+15.09.2018+nV+hp+wt3.8+MUAC6.3'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CBN+0788660270130918+01+16.09.2018+CF+wt4.6+MUAc7'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CBN+1234567890123457+02+17.09.2018+ebf+wt4.4+muac7.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CBN+1234567890123456+01+15.09.2018+NB+wt3.8+MUAC6.3'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CCM+0788660270130918+01+16.09.2018+MA+pr+MUAc7'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CCM+1234567890123457+02+17.09.2018+pc+PT+muac7.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CCM+1234567890123456+01+15.09.2018+DI+TR+MUAC6.3'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CMR+0788660270130918+01+16.09.2018+MA+pr+CW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CMR+1234567890123457+02+17.09.2018+pc+PT+cw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=CMR+1234567890123456+01+15.09.2018+DI+TR+CS'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DTH+0788660270130918+HO+MD'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=DTH+0788660270130918+01+16.09.2018+HO+ND'
+
+
+
+
+
+
+
+
+
+
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=pre+1234567890123456+21.01.2018+15.09.2018+02+01+nr+np+hp+wt55.5+ht145+nt+hw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=pre+1234567890123457+21.01.2018+15.09.2018+02+01+nr+np+hp+wt55.5+ht145+nt+hw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=pre+1234567890123451+21.10.2014+15.09.2018+02+01+GS+MU+HD+RM+OL+YG+KX+YJ+LZ+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+NP+HY+CH+AF+cl+wt55.5+ht145+to+hw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=pre+1234567890123456+21.01.2018+15.09.2018+02+01+gs+mu+hd+rm+ol+yg+kx+yj+lz+pc+oe+ns+ma+ja+fp+fe+ds+di+sa+rb+hy+ch+af+cl+wt55.5+ht145+to+hw'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123451+05.01.2015+anc2+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+cl+wt65.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123456+05.01.2015+anc2+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+cl+wt65.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123456+06.01.2015+anc3+np+hp+wt66.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123456+06.01.2015+anc3+np+hp+wt66.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123456+06.01.2015+anc4+np+hp+wt70.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=ANC+1234567890123456+06.01.2015+anc4+np+hp+wt70.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RISK+1234567890123456+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+ho+wt70'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RISK+1234567890123456+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+ho+wt70'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RISK+1234567890123457+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+or+wt70'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RISK+1234567890123457+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+or+wt70'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RES+1234567890123456+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+hp+AA+MW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RES+1234567890123456+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+hp+AA+MW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RES+1234567890123457+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+cl+PR+MS'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RES+1234567890123457+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+cl+PR+MS'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=BIR+1234567890123454+01+09.01.2015+BO+SB+RB+AF+CI+CM+IB+DB+PM+hp+NB+wt2.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=BIR+1234567890123456+01+09.01.2015+GI+SB+RB+AF+CI+CM+IB+DB+PM+cl+BF1+wt2.8'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=NBC+1234567890123451+01+NBC1+09.01.2015+SB+RB+AF+CI+CM+FE+HY+JA+NS+IB+DB+PM+NB+PR+CS'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=NBC+1234567890123456+01+NBC1+09.01.2015+NP+EBF+AA+CW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=NBC+1234567890123456+01+NBC1+09.01.2015+NP+CBF+AA+CW'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=PNC+1234567890123451+PNC1+09.01.2015+VO+PC+OE+NS+MA+JA+FP+FE+DS+DI+SA+RB+HY+CH+AF+PR+MW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=PNC+1234567890123456+PNC2+09.01.2015+NP+AA+CW'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=PNC+1234567890123456+PNC3+09.01.2015+NP+AA+CW'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CCM+1234567890123451+01+09.01.2015+PC+MA+DI+OI+IB+DB+PR+MUAC5.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CCM+1003565890123456+02+13.03.2015+PC+MA+DI+OI+IB+DB+PR+MUAC5.2'
+curl+-s+-D/dev/stdout+'http://41.74.172.34:5000/backend/kannel-smpp/?id=%2B250788660270&text=CCM+1003565890123456+02+13.03.2015+PC+MA+DI+OI+IB+DB+PR+MUAC5.2'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CMR+1234567890123451+01+09.01.2015+PC+MA+DI+OI+IB+DB+PR+CW'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CBN+1234567890123456+01+09.01.2015+EBF+HT40+WT4.1+MUAC4.6'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CBN+1234567890123456+01+09.01.2015+CBF+HT40+WT4.1+MUAC4.6'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=DTH+1234567890123456+01+09.01.2015+HO+ND'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=DTH+1234567890123456+HO+MD'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=CHI+1234567890123451+01+09.01.2015+V2+VI+IB+DB+HO+WT4.5+MUAC5.4'
+
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=REF+0234567890123457'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=DEP+1234567890123457+01+09.01.2015'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=DEP+1234567890123457'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+1234567890123451+AP+CO+HE+LA+MC+PA+PS+SC+SL+UN+OR+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0789660270121456+09.09.2018+29.04.2019+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RAR+1234567890123451+13.01.2015+AP+CO+HE+LA+MC+PA+PS+SC+SL+UN+HO+AL+MW'

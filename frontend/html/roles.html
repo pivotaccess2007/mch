@@ -1,0 +1,99 @@
+{%  extends "novabase.html" %}
+{%  block title %}Roles{%  endblock  %}
+{%  block subtitle %} Roles {%  endblock  %}
+
+{% block menu %}
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite", minus=["factype"] ) }}'><span>Admin Site</span></a>
+          </li>
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("roles", view= "graphic", minus = ["role"]) }}'>Roles</a></li>
+{% endblock %}
+
+
+{%  block mainpart  %}
+<div class="smallcontainer" style="padding-top:50px;">
+
+	 <img class="icon" 
+		src="{{  static_path }}/images/setting.png"
+	 />
+    <div class="infoname" style="font-size: 20px;">
+	Total Number of Roles
+    </div>
+    <div class="infodata goodnum">
+      <a href="{{ nav.link('/tables/roles', factype=display.factype)}}">{{display.nat[0]['total']|neat_numbers}}</a>
+    </div>
+
+
+
+  </div>
+  </div>
+  
+  <div class="humblecontainer">
+  
+<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">
+	New role registration form
+</div>
+<form method="POST" class="regform">
+	{% if display.message %}
+		<label style="color:blue;">{{display.message}}</label>
+	{%endif%}
+	<br><br>
+
+	<label id="rolenl">Name Of Role: </label>
+	<input type="text" name="rolename" id="rolename" value="" class="ac_input">
+	<br><br>
+	<label id="rolecl">Code Of Role: </label>
+	<input type="text" name="rolecode" id="rolecode" value="" class="ac_input">
+	<br><br>
+	<input type="button"  onClick="return PassCheck(this.form);" value="Register" />
+  </form>
+
+
+  </div>
+
+<script type="text/javascript">
+
+
+function PassCheck(form1)
+	{
+
+	 
+	if(form1.rolename.value=="")
+	{
+		alert("Get in the valid name please.");
+		form1.rolename.focus();
+		return false;
+	}else if( form1.rolecode.value == "" || form1.rolecode.value.length > 3)
+	{
+		alert("Get in the valid code please.");
+		form1.rolecode.focus();
+		return false;
+	} 
+	else
+	{	form1.submit();
+	}
+    }
+</script>
+{%  endblock  %}

@@ -1,0 +1,132 @@
+{%  extends "novabase.html" %}
+{%  block title %}Report{%  endblock  %}
+{%  block subtitle %} Report view {%  endblock  %}
+{% block menu %}
+
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("report", view= "graphic") }}'><span>Report</span></a>
+          </li>
+                   
+         
+
+           
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("report", view= "graphic") }}'>Report View</a></li>
+{% endblock %}
+
+
+{%  block mainpart  %}
+
+<div style="padding-top:0px;">
+<table style="padding-top:0px; width:auto;" class="locationtable">
+<tr>
+{%if display.report.IDENTITY_COLS %}<th><label><h4>IDENTIFICATION</h4></label></th>{%endif%} 
+{%if display.report.HC_COLS %}<th><label><h4 style="padding:5px;">HC INFO</h4></label></th>{%endif%}
+{%if display.report.HD_COLS %}<th><label><h4 style="padding:5px;">HD INFO</h4></label></th>{%endif%}
+{%if display.report.SYMPTOMS_COLS %}<th><label><h4 style="padding:5px;">SYMPTOMS</h4></label></th>{%endif%}
+{%if display.report.DRUGS_COLS %}<th><label><h4 style="padding:5px;">DRUGS</h4></label></th>{%endif%}
+{%if display.report.INTERVENTION_COLS %}<th><label><h4 style="padding:5px;">INTERVENTION</h4></label></th>{%endif%}
+{%if display.report.STATUS_COLS %}<th><label><h4 style="padding:5px;">STATUS</h4></label></th>{%endif%}
+</tr>
+<tr>
+
+{%if display.report.IDENTITY_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+{%for x in display.report.IDENTITY_COLS %}
+	<label style="padding-left:1px; text-align:left;">{{x[1]}}: </label>
+	<input type="text" value = "{{x[2]}}" disabled style="text-align:left;" /> 
+	</br>
+{%endfor%}
+</td>
+{%endif%}
+
+{%if display.report.HC_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+{%for x in display.report.HC_COLS %}
+	<label style="padding-left:1px; text-align:left;">{{x[1]}}: </label>
+	<input type="text" value = "{{x[2]}}" disabled style="text-align:left;" /> 
+	</br>
+{%endfor%}
+</td>
+{%endif%}
+
+{%if display.report.HD_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+{%for x in display.report.HD_COLS %}
+	<label style="padding-left:1px; text-align:left;">{{x[1]}}: </label>
+	{%if x[0] == 'hd_final_diagnostics' %}<textarea style="text-align:left;" disabled cols="50" rows="4"> {{x[2]}} </textarea> 
+	{%else%} <input type="text" value = "{{x[2]}}" disabled style="text-align:left;" />
+	{%endif%} 
+	</br>
+{%endfor%}
+</td>
+{%endif%}
+
+{%if display.report.SYMPTOMS_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top;  width:50px;">
+<ul>
+{%for x in display.report.SYMPTOMS_COLS %}
+	<li><label style="padding-left:1px; text-align:left;">{{x[1]}} </label></li>
+	</br>
+{%endfor%}
+</ul>
+</td>
+{%endif%}
+
+
+{%if display.report.DRUGS_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+<ul>
+{%for x in display.report.DRUGS_COLS %}
+	<li><label style="padding-left:1px; text-align:left;">{{x[1]}} </label></li>
+	</br>
+{%endfor%}
+</ul>
+</td>
+{%endif%}
+
+{%if display.report.INTERVENTION_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+<ul>
+{%for x in display.report.INTERVENTION_COLS %}
+	<li><label style="padding-left:1px; text-align:left;">{{x[1]}} </label></li>
+	</br>
+{%endfor%}
+</ul>
+</td>
+{%endif%}
+
+{%if display.report.STATUS_COLS %}
+<td style="text-align:left; padding-top:2px; vertical-align: top; width:50px;">
+<ul>
+{%for x in display.report.STATUS_COLS %}
+	<li><label style="padding-left:1px; text-align:left;">{{x[1]}} </label></li>
+	</br>
+{%endfor%}
+</ul>
+</td>
+{%endif%}
+
+</tr>
+</table>
+</div>
+
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/jquery.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/autocomplete.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/facebox.js"></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+      $('a[rel*=facebox]').facebox({
+        loading_image : '{{ static_path }}/javascripts/facebox/loading.gif',
+        close_image   : '{{ static_path }}/javascripts/facebox/closelabel.gif'
+      }) 
+    })
+
+
+</script>  
+
+
+{%  endblock  %}

@@ -1,0 +1,21 @@
+{%  extends "novabase.html" %}
+{%  block title %}Enduser {%  endblock  %}
+{%  block subtitle %} Reset Password {%  endblock  %}
+{%  block trunkstyle  %}{%  endblock  %}
+{%  block mainpart  %}
+<div class="smallcontainer">
+  <h1>New {{  nav.listing[-1].name  }} {{ nav.listing[-1].title }}  Administrator</h1>
+  <form method="POST">
+    <fieldset>
+      <label>Address</label>
+      <input name="addr" type="text" placeholder="User Address" />
+    </fieldset>
+    <fieldset>
+      <label>Password</label>
+      <input name="pwd" type="password" placeholder="Password" />
+    </fieldset>
+    <input type="submit" />
+  </form>
+</div>
+
+{%  endblock  %}

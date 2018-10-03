@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+# vim: ai ts=4 sts=4 et sw=4
+
+##
+##
+## @author UWANTWALI ZIGAMA Didier
+## d.zigama@pivotaccess.com/zigdidier@gmail.com
+##
+
+__author__="Zigama Didier"
+__date__ ="$Nov 22, 2017 1:29:30 PM$"
+
+from model.rsmsrwobj import RSMSRWObj
+from util.record import fetch_summary, fetch_chi, fetch_table, fetch_table_by_location
+from exception.mch_critical_error import MchCriticalError
+
+class Childhealth(RSMSRWObj):
+    """A Childhealth report of RapidSMS. Childhealths have the
+    following properties:
+
+    Attributes: TODO
+        
+    """
+
+    _table = 'childhealth'
+
+    def __init__(self,  national_id, birth_date, child_number):
+        """Return a Childhealth object which childhealth_date is *childhealth_date* """
+        self.national_id    = national_id
+        self.birth_date     = birth_date
+        self.child_number   = child_number
+        self.table = Childhealth._table
+
+    def get_or_create(self, orm, obj):
+        """ Retrieve a childhealth object and return childhealth record """
+        try:
+            #print obj.UNIQUE_QUERY
+            chi = fetch_chi(self.national_id, obj.UNIQUE_QUERY)
+            if chi:
+                obj.FIELDS.update({'indexcol': chi.indexcol})
+            self.save(orm, obj)
+            return self.get(obj.UNIQUE_QUERY)
+        except Exception, e:
+            print e
+            raise MchCriticalError(Exception('Childhealth cannot be saved and fetched'))
+        return False
+
+    def get(self, filters):
+        """ Retrieve a childhealth object and return childhealth record """
+        try:
+            chi = fetch_chi(self.national_id, filters)
+            return chi
+        except Exception, e:
+            print e
+            raise MchCriticalError(Exception('Childhealth cannot be fetched'))
+        return False
+
+    def save(self, orm, obj):
+        """ Save a childhealth object and return indexcol """
+        try:
+            ref = orm.ORM.store(self.table, obj.FIELDS)
+            return ref
+        except Exception, e:
+            raise MchCriticalError(Exception('Childhealth cannot be saved'))
+        return False
+
+    @staticmethod
+    def fetch_childhealths(cnds, cols, exts):
+        return fetch_summary(Childhealth._table, cnds, cols, exts)
+
+
+    @staticmethod
+    def fetch_log_childhealths(cnds, cols):
+        return fetch_table(Childhealth._table, cnds, cols)
+
+    @staticmethod
+    def fetch_childhealths_by_location(cnds, group_by = [], INDICS = []):
+        data = []#; print cnds, group_by, INDICS
+        for INDIC in INDICS:
+            #print "CNDS: ", cnds
+            cols = group_by + ['COUNT (*) AS %s' % INDIC[0]]
+            curr_cnds = {INDIC[1]: ''}
+            if INDIC[1] == 'total':
+                cols = group_by + ['COUNT (*) AS %s' % INDIC[0]]
+                curr_cnds = {}           
+            curr_cnds.update(cnds)
+            #print cols
+            data.append(fetch_table_by_location(Childhealth._table, curr_cnds, cols, group_by))
+        return data

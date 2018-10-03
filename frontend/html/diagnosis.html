@@ -1,0 +1,373 @@
+{%  extends "novabase.html" %}
+{%  block title %}Malaria{%  endblock  %}
+{%  block subtitle %} Severe Malaria {%  endblock  %}
+{% block menu %}
+
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("malariadash", view= "graphic", minus=["id", "subcat"]) }}'><span>Severe Malaria</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("stockdash", view= "graphic", minus=["id", "subcat"]) }}'><span>Stock&dash;Out</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("patientdash", view= "graphic", minus=["id", "subcat"]) }}'><span>Patient</span></a>
+	   
+          </li>
+         
+         
+
+           
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("patientdash", view= "graphic", minus = ["group", "id", "subcat" ]) }}'>Patient Diagnosis Form</a></li>
+{% if group %}
+<li> &#187; {{ group }}</li>
+{% endif %}
+{% endblock %}
+
+
+{%  block mainpart  %}
+
+<div id="Form1Layout">
+
+{%if display.user.location_level_code == "HC" %}
+
+{% if display.message %}
+	<h4 style="color:blue;">{{ display.message}}</h4>
+{%endif%}
+
+<form method="POST">
+
+<input type="hidden" name="pk" id="pk" value="{{display.report.indexcol}}" />
+<input type="hidden" name="hc" id="hc" value="{{display.report.facility_pk}}" />
+<input type="hidden" name="hc_user_pk" id="hc_user_pk" value="{{display.user.indexcol}}" />	
+<label id="nid">National ID: </label>
+<input type="hidden" name="nid" id="national_id" value="{{display.report.national_id}}" />
+<input type="text" name="national_id" id="national_id" value="{{display.report.national_id}}" disabled class="ac_input">
+
+<label id="arrival_datetime">Arrival Date&Time: </label>
+<input value="" placeholder="Arrival Date&Time" type="text" name="arrival_datetime" 
+	onFocus="displayCalendar(form.arrival_datetime,'dd/mm/yyyy hh:ii',this, true)" onChange="checkArrivalDate(this);" size = "10" />
+<br>
+  
+<label> HC RegNO/Code: </label>
+<input type="text" name="hc_regno_code" id="hc_regno_code" value="">  
+</br>
+<label>Surname: </label>
+<input type="text" name="surname" id="surname" value="">
+
+<label id="gn">Given Name: </label>
+<input type="text" name="given_name" id="given_name" value="">
+<br>
+<label id="age">Age: </label>
+<input value="" placeholder="Age" type="text" name="age" size ="2" />
+<label id="sex">Sex: </label>
+<select name="sex" id="sexchoose" onChange="disable(this, 'is_pregnant', 1)"><option value=""></option>
+{%for x in display.genders%}<option value={{x.indexcol}}> {{x.name}}</option>{%endfor%}   
+</select>
+</br>
+
+<label id="household">Head of Household: </label>
+<input type="text" name="household" id="household" value="">
+
+<label id="tel">Telephone: </label>
+<input type="text" name="telephone" id="telephone" value="" class="ac_input">
+<br>
+
+<label>Is Pregnant: </label>
+<input value="True" type="checkbox" name="is_pregnant" id="is_pregnant"/>
+</br>
+
+<label id="tdr_negative">TDR Negative:</label>
+<input value="Negative" type="radio" name="tdr" />
+
+<label id="tdr_positive">TDR Positive: </label>
+<input value="Positive" type="radio" name="tdr" />
+<br>
+
+<label id="bs_negative">BS Negative:</label>
+<input value="Negative" type="radio" name="bs" />
+
+<label id="bs_positive">BS Positive: </label>
+<input value="Positive" type="radio" name="bs" />
+<br>
+
+<label id="hemoglobin">Hemoglobin: </label>
+<input value="" type="text" name="hemoglobin" />
+<label id="blood_glucose">Blood Glucose: </label>
+<input value="" type="text" name="blood_glucose" />
+<br>
+<label id="blood_group">Blood group: </label>
+<select name="blood_group">
+<option value=""></option>
+<option value="A+">A RhD positive (A+)</option>
+<option value="A-">A RhD negative (A-)</option>
+<option value="B+">B RhD positive (B+)</option>
+<option value="B-">B RhD negative (B-)</option>
+<option value="O+">O RhD positive (O+)</option>
+<option value="O-">O RhD negative (O-)</option>
+<option value="AB+">AB RhD positive (AB+)</option>
+<option value="AB-">AB RhD negative (AB-)</option>
+</select>
+<!--<input value="" type="text" name="blood_group" /> -->
+<br>
+<br>
+<label >Pre&dash;transfer treatment:</label>
+<label id="artesunate">Artesunate </label>
+<input value="Artesunate" type="checkbox" name="artesunate" />
+<label id="diazepam">Diazepam </label>
+<input value="Diazepam" type="checkbox" name="diazepam" />
+<label id="phenobarbital">Phenobarbital </label>
+<input value="Phenobarbital" type="checkbox" name="phenobarbital" />
+<br>
+
+<label id="transfered">Transfered: </label>
+<input value="True" type="checkbox" name="transfered" />
+<label id="ambulance">Ambulance provided: </label>
+<input value="True" type="checkbox" name="ambulance" />
+<label id="dep">Date&Time: </label>
+<input value="" placeholder="Departure" type="text" name="ambulance_departure" 
+		onFocus="displayCalendar(form.ambulance_departure,'dd/mm/yyyy hh:ii',this, true)" 
+		onChange="checkDepartureDate(this.form.arrival_datetime, this);" size = "10" />
+<br><br>
+
+<label id="is_dead">Death before transfer: </label>
+<input value="True" type="checkbox" name="is_dead" />
+<br><br>
+<label id="ntayo">&nbsp;</label>
+<input type="button" class="My_Button" onClick="return PassCheck(this.form);" value="Submit" />
+</br>
+</form>
+{%else%}
+	{%if display.user.location_level_code == "HD" %}
+
+<form method="POST">
+{% if display.report.has_gone_hc %}
+
+<label >HC Arrival Date&Time: </label><label> {{display.report.hc_arrival_datetime}} </label>
+<label >Age: </label><label >{{ display.report.age }} </label>
+<br>
+
+<label >Sex: </label><label> {{display.report.sex_pk}} </label>
+<label >Head of household: </label><label >{{ display.report.household }} </label>
+<br>
+	
+{%else%}
+<h4 style="color:red;">Patient has not gone to health centre</h4>
+{%endif%}    
+
+{% if display.message %}
+	<h4 style="color:blue;">{{ display.message }}</h4>
+{%endif%}
+<br>
+
+<input type="hidden" name="pk" id="pk" value="{{display.report.indexcol}}" />
+<input type="hidden" name="hd" id="hd" value="{{display.report.referral_facility_pk}}" />
+<input type="hidden" name="hd_user_pk" id="hd_user_pk" value="{{display.user.indexcol}}" />
+
+<label> HD RegNO/Code: </label>
+<input type="text" name="hd_regno_code" id="hd_regno_code" value=""> 
+</br> 
+
+<label>Surname: </label>
+<input type="text" name="surname" id="surname" value="{{display.report.surname}}" disabled />
+
+<label id="gn">Given Name: </label>
+<input type="text" name="given_name" id="given_name" value="{{display.report.given_name}}" disabled />
+<br>
+	
+<label id="nid">National ID: </label>
+<input type="hidden" name="nid" id="national_id" value="{{display.report.national_id}}" />
+<input type="text" name="national_id" id="national_id" value="{{display.report.national_id}}" disabled class="ac_input">
+
+<label id="arrival_datetime">Arrival Date&Time: </label>
+<input value="" placeholder="Arrival Date&Time" type="text" name="arrival_datetime" 
+	onFocus="displayCalendar(form.arrival_datetime,'dd/mm/yyyy hh:ii',this, true)" onChange="checkArrivalDate(this);"  size = "10" />
+</br>
+</br>
+
+<label >Final Diagnostics:</label>
+<label>Severe malaria cerebral form </label>
+<input value="Severe malaria cerebral form" type="checkbox" name="cerebral_form" id="cerebral_form" 
+onChange="disable(this, 'ma_comorbidities', 'Severe malaria cerebral form'); disable(this, 'no_ma_confirmed', 'Severe malaria cerebral form'); "
+/>
+<label>Severe malaria anemic form </label>
+<input value="Severe malaria anemic form" type="checkbox" name="anemic_form" id="anemic_form" 
+onChange="disable(this, 'ma_comorbidities', 'Severe malaria anemic form'); disable(this, 'no_ma_confirmed', 'Severe malaria anemic form'); "
+/>
+<label>Severe malaria with other complication </label>
+<input value="Severe malaria with other complication" type="checkbox" name="sm_complication" id="sm_complication" 
+onChange="disable(this, 'ma_comorbidities', 'Severe malaria with other complication'); disable(this, 'no_ma_confirmed', 'Severe malaria with other complication'); "
+/>
+</br>
+<label>&nbsp;</label>
+<label>Simple malaria with other comorbidities </label>
+<input value="Simple malaria with other comorbidities" type="checkbox" name="ma_comorbidities" id="ma_comorbidities" 
+onChange="disable(this, 'cerebral_form', 'Simple malaria with other comorbidities'); disable(this, 'anemic_form', 'Simple malaria with other comorbidities'); disable(this, 'sm_complication', 'Simple malaria with other comorbidities'); disable(this, 'no_ma_confirmed', 'Simple malaria with other comorbidities'); "
+/>
+<label>Malaria not confirmed </label>
+<input value="Malaria not confirmed" type="checkbox" name="no_ma_confirmed" id="no_ma_confirmed" 
+	onChange="disable(this, 'cerebral_form', 'Malaria not confirmed'); disable(this, 'anemic_form', 'Malaria not confirmed'); disable(this, 'sm_complication', 'Malaria not confirmed'); disable(this, 'ma_comorbidities', 'Malaria not confirmed'); "/>
+</br>
+</br>
+
+<label id="pstatus">Patient Status: </label>
+<label id="referred">Referred</label>
+<input value="Referred" type="radio" name="patient_status" />
+<label id="cured">Cured </label>
+<input value="Cured" type="radio" name="patient_status" />
+<label id="death">Dead </label>
+<input value="Dead" type="radio" name="patient_status" />
+<br><br>
+<label id="ntayo">&nbsp;</label>
+<input type="button" class="My_Button" onClick="return PassCheck(this.form);" value="Submit" />
+</br>
+</form>
+
+			
+	{%else%}
+		{%  set hc, hd =  nav.hc(hc=display.report.facility_pk) , nav.hd(hd=display.report.referral_facility_pk) %}
+		<div class="tdesc">
+		   <h4> 
+	You are neither a Clinician at {{hc.name}} nor a Clinician at {{hd.name}}, please contact {{hc.name}} or {{hd.name}} to do this for you. 
+		   </h4>
+		</div>
+	{%endif%}
+{%endif%}
+
+</div>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/jquery.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/autocomplete.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/facebox.js"></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+      $('a[rel*=facebox]').facebox({
+        loading_image : '{{ static_path }}/javascripts/facebox/loading.gif',
+        close_image   : '{{ static_path }}/javascripts/facebox/closelabel.gif'
+      }) 
+    })
+
+
+</script>  
+
+<script type="text/javascript">
+
+//CHW autocomplete
+$().ready(function() {
+//alert("OK");
+
+$( ".arrival_date" ).change(function() {
+  var value = $(this).attr('value');
+  alert( "Value:" + value );
+});
+
+$('#user_province').change(function(evt){   
+		var value = $(this).attr('value'); // alert("PRV: " + value);
+		var selected_dsts = _.filter(districts, function(item) { 
+							//alert( value+", "+ item.province_pk+", "+ item.nation_pk +", "+ item.district_pk)
+									document.getElementById('user_nation').value = item.nation_pk;
+									 return item.province_pk == value;  }); 
+		//alert(JSON.stringify(selected_dsts));
+		//alert(selected_dsts.length);
+		document.getElementById("user_district").options.length=0;
+		for ( var i=0; i<selected_dsts.length; i++ ){ 
+				dst = selected_dsts[i];
+				document.getElementById('user_district').options[i+1] = new Option(dst.district_name, dst.district_pk);
+							}
+
+		});
+
+$('#user_district').change(function(evt){   
+		var value = $(this).attr('value');  //alert("DIST: " + value);
+		var selected_hps = _.filter(hps, function(item) {  return item.district_pk == value;  }); 
+		//alert(JSON.stringify(selected_hps));
+		document.getElementById("user_hospital").options.length=0;
+		for ( var i=0; i<selected_hps.length; i++ ){ 
+				hd = selected_hps[i];
+			document.getElementById('user_hospital').options[i+1] = new Option(hd.referral_name, hd.referral_facility_pk);
+							}
+
+		});
+
+$('#user_hospital').change(function(evt){   
+		var value = $(this).attr('value');  
+		var selected_hcs =_.filter(locations, function(item) {  return item.referral_facility_pk == value;  }); 
+		//alert(JSON.stringify(selected_hcs));
+		document.getElementById("user_facility").options.length=0;
+		for ( var i=0; i<selected_hcs.length; i++ ){ //alert("HD: " + value);
+						hc = selected_hcs[i];
+						document.getElementById('user_facility').options[i+1] = new Option(hc.name, hc.indexcol);
+							}
+
+		});
+
+
+
+});
+
+
+
+
+
+function PassCheck(form1)
+	{ 
+	if (form1.hc){ //alert("HC");
+
+		if(form1.telephone.value=="" || form1.telephone.value.length != 10 || isNaN(form1.telephone.value)  )
+		{
+		alert("Get in the Valid Telephone Number please.");
+			form1.telephone_moh.focus();
+			return false;
+		}
+		else if(form1.nid.value=="" || form1.nid.value.length != 16 || isNaN(form1.nid.value) )
+		{
+		alert("Get in the Valid National ID.");
+		form1.nid.focus();
+		return false;
+		}
+		else if(form1.surname.value=="" || form1.given_name.value == "")
+		{
+		alert("Get in surname and given names Please.");
+		form1.surname.focus();
+		return false;
+		}
+
+		else if(form1.age.value=="")
+		{
+		alert("Get in age please.");
+		form1.age.focus();
+		return false;
+		}
+
+		else if(form1.sex.value=="")
+		{
+		alert("Select Sex Please.");
+		form1.sex.focus();
+		return false;
+		}
+	
+		else
+		{
+			form1.submit();
+		}
+
+	}else if (form1.hd){ //alert("HD");
+
+		if(form1.nid.value=="" || form1.nid.value.length != 16 || isNaN(form1.nid.value) )
+		{
+		alert("Get in the Valid National ID.");
+		form1.nid.focus();
+		return false;
+		}
+		else
+		{
+			form1.submit();
+		}
+
+		}
+    }
+</script>
+
+{%  endblock  %}

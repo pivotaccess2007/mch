@@ -1,0 +1,35 @@
+<table width="100%"> 
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Submission</th>
+            <th>LMP</th>
+            <th>Gravidity</th>
+            <th>Parity</th>
+            <th>Weight</th>
+	    <th>Height</th>
+	    <th>Reporter</th>
+	    <th>Patient</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{% for report in display.pregnancy %}
+            <tr>
+            	<td>Pregnancy</td>
+                <td>{{report.report_date}}</td>
+		<td>{{report.lmp}}</td>
+                <td>{{report.gravidity|int}}</td>
+ 		<td>{{report.parity|int}}</td>
+		<td>{{report.mother_weight}}</td>
+		<td>{{report.mother_height}}</td>
+		<td>{{report.reporter_phone}}</td>
+		<td>{{report.indangamuntu}}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+    
+    <tfoot>
+			
+	</tfoot>
+</table>

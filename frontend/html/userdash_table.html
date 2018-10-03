@@ -1,0 +1,39 @@
+{%  extends "novabase.html" %}
+{%  block title %}Users{%  endblock  %}
+{%  block subtitle %} Users statistics {%  endblock  %}
+
+{% block menu %}
+ 	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>     
+{% endblock %}
+
+{% block position %}
+<li >&#187; <a href="{{ nav.link('/dashboards/userdash')}}">Users</a></li>
+{% if display.group %}
+<li> &#187; <a href="/tables/{{ nav.link('userdash', view= 'graphic', minus = ['group']) }}" >{{ display.group }}</a></li>
+{% endif %}
+{% endblock %}
+
+{%  block mainpart  %}
+  {%  include "basictable.html"  %}
+{%  endblock  %}

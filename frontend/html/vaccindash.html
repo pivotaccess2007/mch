@@ -1,0 +1,47 @@
+{%  extends "novabase.html" %}
+{%  block title %}{{  nav.listing[-1].name  }} {{  nav.listing[-1].title }} Vaccinations {%  endblock  %}
+{%  block subtitle %} Vaccinations {%  endblock  %}
+{%  block trunkstyle  %} style="background: url('{{ static_path }}/images/vacc.jpg') no-repeat fixed center"{%  endblock  %}
+{% block menu %}
+	  <li class="">
+            <a href='/dashboards/{{ nav.link("ccmdash", view= "graphic", minus=["group", "subcat"]) }}'><span>CCM</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("vaccindash", view= "graphic", minus=["group", "subcat"]) }}'><span>Vaccinations</span></a>
+          </li>
+{% endblock %}
+{%  block mainpart  %}
+  <div class="smallcontainer">
+    {% for vc in display.vac_comps_attrs %}
+    <div class="infoname childhealthtext" style="font-size:18px; padding-top:20px;">{{vc[1]}}</div>
+    <div class="moretotal" ><a href="{{ nav.link('/tables/vaccindash', subcat=vc[0], summary = 'on')}}">View by Location</a></div>
+    <div class="infodata goodnum">
+      <a href="{{ nav.link('/tables/vaccindash', subcat=vc[0] )}}">{{  display.nat[0][vc[0]]|neat_numbers }}</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="humblecontainer">
+		
+		<div class="infoname childhealthtext" style="padding-left:200px; padding-top:20px; padding-bottom: 20px;">Vaccination Series Completion</div>
+        
+	{%  for vac in display.vac_series_attrs %}
+	  <div class="datapoint childhealthcircle">
+	  
+	    {%  set num = display.nat[0][vac[0]] %}
+	    
+	    <div class="descr">{{  vac[1] }}</div>
+	    <div class="moreoptions startshidden" >
+		 <a href="/tables/{{  nav.link('vaccindash', subcat = vac[0], minus = ['pid', 'id'], summary = 'on')  }}">View by Location</a>
+	    </div>
+	    <div class="number">
+		{% if  num %}<a href="/tables/{{  nav.link('vaccindash', subcat = vac[0], minus = ['pid', 'id'])  }}">{{ num|neat_numbers }}</a>
+		{% else  %}  {{  num|neat_numbers }}  {%  endif %}
+	    </div>
+	    
+  	   </div>
+	{%  endfor  %}
+      
+  
+ 
+ </div>
+{%  endblock  %}

@@ -1,0 +1,307 @@
+{% set module = 'none' %}
+ 
+ {% if ref == 'predash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  {% if ref == 'ancdash'  %}
+  {% set module = 'pregnancies' %} 
+  {% endif %}
+  {% if ref == 'deliverydash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  {% if ref == 'deliverynotdash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  
+  
+  
+  {% if ref == 'nbcdash' %}
+  {% set module = 'newborn' %}
+  {% endif  %}
+  
+  
+  {% if ref == 'nutr'  %}
+  {% set module = 'nutrition' %}
+  {% endif %}
+  
+  
+  {% if ref == 'pncdash'  %}
+  {% set module = 'postnatal' %}
+  {% endif %}
+  
+  
+  {% if ref == 'ccmdash'  %}
+  {% set module = 'childhealth' %}
+  {% endif %}
+  {% if ref == 'vaccindash'  %}
+  {% set module = 'childhealth' %}
+  {% endif %}
+  
+  
+  {% if ref == 'patient'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'newborn'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'growthchart'  %}
+  {% set module = 'single' %}
+  {% endif %}
+   {% if ref == 'patienthistory'  %}
+  {% set module = 'single' %}
+  {% endif %}
+
+  {% if ref == 'reportsdash'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwstaff'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwreg'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwamb'  %}
+  {% set module = 'single' %}
+  {% endif %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RapidSMS • {%  block title %}  Welcome {%  endblock  %}</title>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    {#  <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/{%  if  nav.kw.get('format') == 'reports' %}samples{%  else  %}subjectivised{%  endif %}.css" /> #}
+    
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/layout.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/menu.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/deeper.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/table.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/javascripts/facebox/autocomplete.css" />
+    <link href="{{ static_path }}/javascripts/facebox/facebox.css" rel="stylesheet" type="text/css" />
+    
+     <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+       <script src="{{ static_path }}/javascripts/jquery-1.7.1.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <script src="{{ static_path }}/javascripts/clientside.js" type="text/javascript"></script>
+    <script src="{{ static_path }}/javascripts/samples.js" type="text/javascript"></script> 
+	<script src="{{ static_path }}/javascripts/zdmin.js"></script>
+	<script src="{{ static_path }}/javascripts/deactivate.js"></script>
+	 <script src="{{ static_path }}/javascripts/locations.js"></script> 
+
+	<!-- NEW FILTER -->
+	
+		<!-- <script type="text/javascript"    src="{{ static_path }}/javascripts/stats.js"></script> 
+		<link rel="stylesheet" type="text/css"    href="{{ static_path }}/stylesheets/stats.css" /> -->
+		<link type="text/css" rel="stylesheet" href="{{ static_path }}/javascripts/calendar/dhtmlgoodies_calendar.css"></link>
+		<script type="text/javascript" src="{{ static_path }}/javascripts/calendar/dhtmlgoodies_calendar.js"></script>
+
+	<!-- END OF NEW FILTER -->
+	
+    <script>
+    	$(function()
+    	{
+    		
+    		
+    		
+    		$('.datapoint').each(function(ix, dtp)
+    		{
+    			  	//console.log( ix + ": " + dtp );
+    			  var ndpt	=	$(dtp);
+    			  ndpt.hover(function(evt)
+    					  {
+    				  		var mo = $('.moreoptions', this);
+    				  		//var deep = $('.triangle-border', this);
+    				  		$(mo).removeClass('startshidden');
+    				  		//$(deep).removeClass('startshidden');
+    					  },
+    					  function(evt)
+    					  {
+    						var mo = $('.moreoptions', this);
+    						$(mo).addClass('startshidden');
+    					  });
+			});
+    		$('.dropdownlink').click(function(evt){
+    			swaps   = {none: 'block', block:'none'},
+    			now	    = $('.triangle-border ').css('display');
+    			if(now == 'none')
+    			{
+  			  $('.triangle-border ').css({'display':swaps[now]});
+    			}
+    			else $('.triangle-border ').css({'display':swaps[now]});
+			 });
+    		
+    		$('tbody tr').hover(function() {
+    			  $(this).addClass('odd');
+    			}, function() {
+    			  $(this).removeClass('odd');
+    			});
+    	});
+    	
+    	$(document).ready(function(){
+			
+			 $(".cssmenu ul .home").hover(function(){
+				   $(".cssmenu ul ul ").css("display","block");
+			   },function(){
+				   $(".cssmenu ul ul").css("display","none");
+				 });
+
+		});
+    	
+	</script>    
+  </head>
+  <body>
+  
+  
+    <div id="top">
+   
+      <div id="header">
+                <div id="langs">
+          <ul>
+            <li>English</li>
+            <li>Kinyarwanda</li>
+            <li>Francais</li>
+          </ul>
+        </div>
+        <div id="user">{{ display.auth.username() }}- <a href="/authentication?logout=yes">Logout</a></div>
+        {%  block topstrip  %}
+
+        <div id='cssmenu' class="cssmenu">
+        <ul class="cssmenu">
+          <li class="home">
+            <a href="/dashboards/home"><span>Home</span></a>
+           <ul>
+		   <li class="{%  if  ref == 'pregnancy' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("predash", minus = ["group"])}}'><span>Pregnancies</span></a></li>
+		   <li class="{%  if  ref == 'anc' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("nbcdash", view= "graphic") }}'><span>New Borns</span></a></li>
+		   <li class="{%  if  ref == 'brithreport' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("ccmdash", view= "graphic") }}'><span>Child Health</span></a></li>
+		   <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("pncdash", view= "graphic") }}'><span>Post Natal</span></a></li>
+		   <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("nutr") }}'><span>Nutrition</span></a></li>
+        <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("reddash") }}'><span>RED ALERT</span></a></li>
+         <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("chw") }}'><span>CHWS</span></a></li>
+        
+  		   </ul>
+       </li>
+          {% block menu %}
+          
+          {% endblock %}
+          </ul>
+        </div>
+        <div id="subtitle">
+          <div id="mainhead"><a href="/dashboards/{{ ref }}">{%  block subtitle %}{% endblock  %}</a></div>
+          <div id="extrainfo">{%  block extrainfo %}
+           <a href="{{ nav.link(ref)  }}"> <div id="filteredLocation">{{ nav }}</div></a>
+            <div id="filteredDate">
+                {{  nav.start.strftime("%A %d %B %Y") }}-{{  nav.finish.strftime("%A %d %B %Y") }}
+              </div>
+            
+            <div class="count">{{  (1 + (nav.finish - nav.start).days)|neat_numbers }} Days</div>
+          {% endblock  %}</div>
+        </div>
+        <div id="filter">
+	  <!--
+          <form id="dateranges">
+            
+              {%  include "dater.html"  %}
+              {%  include "hlocator.html"  %}
+	      {%  include "params.html"  %}
+            
+            <input type="submit" value="Refresh" />
+          </form>
+
+          <form id="myform">
+		<input type="hidden" id="loginuser" name="loginuser" value="{{ display.auth.username() }}" /> 
+		<input type="checkbox" name="ca" onchange="chgtx();" />
+		<select name="province" id="provchoose" onChange="changeDistrict(this.value);"> </select>
+		<input type="checkbox" name="cb" onchange="chgty();" />
+		<select name="district" id="distchoose" onChange="changeLocation(this.value);"><option >  </option>  </select>
+		<input type="checkbox" name="cc" onchange="chgtz();" />
+		<select name="hc" id="locchoose"><option > </option></select> 
+        <input type="submit" value="Refresh" />
+          </form>
+	-->
+
+	<!-- START NEW FILTER -->
+
+	<form >
+       	   <div id="dateranges"> 	
+           <input style="background-color: white"  type="text" placeholder="Start date" id="pickstartdate" value="{{  nav.start.strftime('%d/%m/%Y')  }}"  name="start" 					readonly="readonly"  onFocus="displayCalendar(form.start,'dd/mm/yyyy',this)" size = "10"/>
+           <input style="background-color: white" type="text" placeholder="End date" id="pickenddate" value="{{   nav.finish.strftime('%d/%m/%Y')   }}"  name="finish" 					readonly="readonly"  onFocus="displayCalendar(form.finish,'dd/mm/yyyy',this)" size = "10" />
+             </div>
+	    <div id="myform">       
+            <select name="province" id="provchoose" onChange="changeDistrict(this.value);"><option value=""></option>
+                
+            </select>
+                    
+            <select name="district" id="distchoose" onChange="changeLocation(this.value);"><option value=""></option>
+                
+            </select>
+                    
+            <select name="hc" id="locchoose"><option value=""></option>
+                
+            </select>
+                    
+            <input type="button" value="Update Filters"  onClick="return deroulement(this.form);"/>
+            </div>        
+       
+    </form>
+	<!-- END NEW FILTER -->
+        </div>
+      </div>
+      
+</div>
+
+
+
+
+
+ <div class="navigator">
+	<div class="central">
+    <div class="position">
+
+     <li><a href="/dashboards/home">  Home</a></li>
+{% block position %}{% endblock %}
+
+</div>
+      
+   {% if module != 'single' %}
+   
+      <div class="view">
+      <div class="tabular {% if view == 'log' %} {{ module }}background {% endif %} "><a href="/tables/{{ nav.link(ref, view = 'log', minus = ['summary']) }}">Log</a></div>
+      <div class="tabular {% if view == 'table'%} {{ module }}background {% endif %}"><a href="/tables/{{ nav.link(ref, summary = 'on', view = 'table')}}">Table</a></div>
+      <div class="graphic {% if view == 'graphic' %} {{ module }}background {% endif %}"><a href="/dashboards/{{ nav.link(ref, view = 'graphic', minus = ['summary'])}}">Summary</a></div>
+      </div>
+  {% endif %}
+	</div>
+	</div>
+      
+
+      <div id="main">
+      {%  endblock  %}
+      <div id="trunk"{% block trunkstyle  %}  style="background: url('{{  static_path }}/images/preg.jpg') fixed center no-repeat"{% endblock  %}>
+        {%  block mainpart  %}
+          {{  static_path }}
+        {%  endblock  %}
+      </div>
+      </div>
+      <div id="footer">
+        <div id="footerblueline"><img src="{{ static_path }}/images/Layer16.png"></div>
+			<div id="ContactUsReachouttou">
+			<!--<strong>Contact Us</strong>
+			
+			<br><br>
+			+250 78123456<br>
+			114
+			<br><br>
+			info@rapidsms.gov.rw
+			-->
+			</div>
+			
+			
+			<div id="uniceflogo"><!--Rapid Sms Rwanda V3--></div>
+			<div id="rapidsmsfooterlogo"><img src="{{ static_path }}/images/Layer19.png"></div>
+			<div id="ministrylogo"><img src="{{ static_path }}/images/rwanda.png"></div>
+			<!--  -->
+        
+      </div>
+   
+
+  </body>
+</html>

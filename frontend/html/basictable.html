@@ -1,0 +1,265 @@
+{% set module = 'none' %}
+{% set export = 'none' %}
+ 
+ {% if ref == 'predash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  {% if ref == 'ancdash'  %}
+  {% set module = 'pregnancies' %} 
+  {% endif %}
+  {% if ref == 'deliverydash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  {% if ref == 'deliverynotdash'  %}
+  {% set module = 'pregnancies' %}
+  {% endif %}
+  
+  
+  
+  {% if ref == 'nbcdash' %}
+  {% set module = 'newborn' %}
+  {% endif  %}
+  
+  
+  {% if ref == 'nutr'  %}
+  {% set module = 'nutrition' %}
+  {% endif %}
+  
+  
+  {% if ref == 'pncdash'  %}
+  {% set module = 'postnatal' %}
+  {% endif %}
+  
+  
+  {% if ref == 'ccmdash'  %}
+  {% set module = 'childhealth' %}
+  {% endif %}
+  {% if ref == 'vaccindash'  %}
+  {% set module = 'childhealth' %}
+  {% endif %}
+  
+  
+  {% if ref == 'patient'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'newborn'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'growthchart'  %}
+  {% set module = 'single' %}
+  {% endif %}
+   {% if ref == 'patienthistory'  %}
+  {% set module = 'single' %}
+  {% endif %}
+
+  {% if ref == 'reportsdash'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwstaff'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwreg'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chwamb'  %}
+  {% set module = 'single' %}
+  {% endif %}
+  {% if ref == 'chw'  %}
+  {% set module = 'single' %}
+  {% set export = 'yes' %}
+  {% endif %}
+  {% if ref == 'groupmessage'  %}
+  {% set module = 'single' %}
+  {% endif %}
+
+  {% if ref == 'malariadash'  %}
+  {% set module = 'malariadash' %}
+  {% endif %}
+
+
+
+{% if pid %}
+<div class="final">
+
+<div class="firstsection">
+{%  for row in display.nat.list() %} 
+	{%  for col in display.cols %}
+      <div class="property">
+			<div class="name">
+        {%  set mkp = display.markup[col[0]] %}
+        {{ col[1] }} :</div>
+         <div class="value">
+        {%  if  mkp %}
+        {{  mkp(row[col[0]], row, col)  }}
+        {%  else  %}
+        {{  row[col[0]]  }}
+        {% endif %}
+        </div>
+           
+  </div>
+        {%  endfor  %}
+ 
+</div>
+        <div class="intro">
+        
+        {%  if  display.attrs %}
+       <h3>More Information:</h3>
+          {%  for bc in display.attrs %}
+          {%  if  row[bc[0]] == True %}
+          <div class="more">
+         {{  bc[1] }}<br>
+          </div>
+          {% endif %}
+          
+          {%  endfor  %}
+        
+        {%  endif %}
+      </div>
+    {%  endfor  %}
+<br><br>
+</div>
+
+{% else %}
+ {%  set cpg, rng, pgs = nav.pages(display.nat) %}
+
+
+
+<div class="tdesc">
+{{ display.desc  }} - (Page {{  cpg + 1 }}) - ({{  display.nat.count()|neat_numbers }} Total)
+</div>
+
+  <div class="tdesclocation">
+    {{  nav.listing[-1].name  }}  {{  nav.listing[-1].title }}
+  </div>
+  {% if export == 'yes'%}
+    <div class="exporter">
+    <form method="POST" action="/exports/general">
+      {%  include "hlocator.html"  %}
+      {%  include "hdater.html"  %}
+      <input type="hidden" value="{{ ref }}" name="key" />
+      <input type="hidden" value="{{ subcat }}" name="subcat" />
+      <input type="submit" value="Export" />
+    </form>
+  </div>
+  {% endif %}
+
+<table class="largetable">
+  <thead>
+    <tr>
+      {% if module != 'single'%}<th>#</th>{% endif %}
+      {% if display.markup.get('action') %}<th>Action</th> {% endif %}
+      {%  for col in display.cols %}
+	
+        {% if col[1] == 'LMP'%}
+        <th>{{  col[1] }}</th>
+	<th> EDDate </th>
+	{% else %}
+		{% if col[0] == 'bmi' %}
+				<th>{{ col[1] }}</th>
+			{% else %}
+				{% if col[0] == 'indexcol'%}
+					{% else %}				
+					<th>{{  col[1] }}</th>
+				{% endif %}
+		{% endif %}
+	{% endif %}
+      {%  endfor  %}
+      {% if display.markup.get('symptoms') %}<th>Symptoms</th> {% endif %}
+      {% if display.markup.get('drugs') %}<th>Drugs</th> {% endif %}
+      {% if display.markup.get('message') %}<th>Message</th> {% endif %}
+      <!-- {%  if  display.attrs %}<th>Attributes</th>{% endif %} -->
+       <!-- {% if module != 'single'%}<th>Message</th>{% endif %} -->
+    </tr>
+  </thead>
+  <tbody>
+    {#  {%  for row in display.nat.list() %}  #}
+    {%  for row in display.nat[rng[0]:rng[1]] %}
+      <tr class="{{ loop.cycle('even', 'odd')  }}">
+	
+        {% if module != 'single'%}<td class="cnt" 
+					{% if row['high_risky'] == True %} style="background-color:red" 
+					{% else %}
+						{% if row['at_risky'] == True %} style="background-color:yellow" {% endif%} 
+					{% endif %}>
+			{%  set mkp = display.markup['indexcol'] %} {{mkp(row['indexcol'], row, col)}}</td>
+	{% endif %}
+	{% if display.markup.get('action') %}
+			{%  set mkp = display.markup['action'] %}
+			<td>{{mkp(row['action'], row, col)|get_link('id', row['indexcol'])}}</td> 
+	{% endif %}
+        {%  for col in display.cols %}
+	  
+          {% if col[1] == 'LMP'%}
+		{%  set mkp, edd = display.markup[col[0]], display.markup['edd'] %}
+		<td>{{  mkp(row[col[0]], row, col) }}</td>
+		<td> {{  edd(row[col[0]], row, col) }} </td>
+	{% else %}
+		{% if col[0] == 'bmi' %}
+			<td>{{ row['bmi']|round(1, 'common') }}</td>
+		{% else %}
+			{% if col[0] == 'indexcol'%}
+				{% else %}
+					  {%  set mkp = display.markup[col[0]] %}
+					  <td>{%  if  mkp %}{{  mkp(row[col[0]], row, col)  }}{%  else  %}{{  row[col[0]]  }}{% endif %}</td>
+			{%endif%}
+	{% endif %}
+        {% endif %}
+        {%  endfor  %}
+        {%  if  display.attrs %}
+        <!-- <td>
+          {%  for bc in display.attrs %}
+          {%  if  row[bc[0]] == True %}<div class="boolval">{{  bc[1] }}</div>{% endif %}
+          {%  endfor  %}
+        </td> -->
+        {%  endif %}
+	{% if display.markup.get('symptoms') %}
+			{%  set mkp = display.markup['symptoms'] %}
+			<td>{{mkp(row['indexcol'], row, col)}}</td> 
+	{% endif %}
+	{% if display.markup.get('drugs') %}
+			{%  set mkp = display.markup['drugs'] %}
+			<td>{{mkp(row['indexcol'], row, col)}}</td> 
+	{% endif %}
+	{% if display.markup.get('message') %}
+			{%  set mkp = display.markup['message'] %}
+			<td>{{mkp(row['indexcol'], row, col)}}</td> 
+	{% endif %}
+	<!--{% if module != 'single'%}<td>{{row|report_summary}}</td>{% endif %}-->
+      </tr>
+    {%  endfor  %}
+  </tbody>
+</table>
+
+{% if display.nat.count() > 20 %}
+<div class="paginant">
+  <div class="navigant">
+    <ul>
+    <li><a href="./{{ nav.link(ref, page = cpg - 1 )  }}">&#171;</a></li>
+     {% if cpg + 1 > 3 %}
+    <li><a href="./{{ nav.link(ref, page = 0 )  }}">1&#133;</a></li>
+    {% endif %}
+    {% if cpg > 1 %}
+    <li><a href="./{{ nav.link(ref, page = cpg - 2 )  }}">{{ cpg - 1  }}</a></li>
+    {% endif %}
+    {% if cpg > 0 %}
+    <li><a href="./{{ nav.link(ref, page = cpg - 1 )  }}">{{ cpg  }}</a></li>
+    {% endif %}
+    <li>{{ cpg + 1 }}</li>
+    {% if pgs|length >= cpg + 2 %}
+    <li><a href="./{{ nav.link(ref, page = cpg + 1)  }}">{{ cpg + 2 }}</a></li>
+    {% endif %}
+    {% if pgs|length >= cpg + 3 %}
+    <li><a href="./{{ nav.link(ref, page = cpg + 2)  }}">{{ cpg + 3 }}</a></li>
+    {% endif %}
+    {% if pgs|length >= cpg + 4 %}
+    <li><a href="./{{ nav.link(ref, page = pgs|length  - 1)  }}"> &#133; {{ pgs|length }}</a></li>
+    {% endif %}
+   <li><a href="./{{ nav.link(ref, page = cpg + 1)  }}"> &#187;</a></li>
+    {% endif %}
+    
+    
+    
+    </ul>
+  </div>
+</div>
+{% endif %}

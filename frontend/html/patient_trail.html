@@ -1,0 +1,102 @@
+{%  extends "novabase.html" %}
+{%  block title %}Malaria{%  endblock  %}
+{%  block subtitle %} Severe Malaria {%  endblock  %}
+{% block menu %}
+
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("malariadash", view= "graphic") }}'><span>Severe Malaria</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("stockdash", view= "graphic") }}'><span>Stock&dash;Out</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("patientdash", view= "graphic") }}'><span>Patient</span></a>
+	   
+          </li>
+         
+         
+
+           
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("predash", view= "graphic", minus = ["group"]) }}'>Patient Trail</a></li>
+{% if group %}
+<li> &#187; {{ group }}</li>
+{% endif %}
+{% endblock %}
+
+
+{%  block mainpart  %}
+<div class="humblecontainer">
+  
+<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">View Patient Trail</div>
+  <form method="POST" class="regform" action="/dashboards/patientdash">
+	<label id="nid">National ID: </label>
+	<input type="text" name="nid" value="{{display.nid}}" class="ac_input">
+	<br><br>
+	<label id="guhera">Start Date: </label>
+	<input value="{{  nav.start.strftime('%d/%m/%Y')  }}" placeholder="" type="text" 
+		name="start" onFocus="displayCalendar(form.start,'dd/mm/yyyy',this)" size = "10"/>
+  	<br><br>
+	<label id="kugeza">End Date: </label>
+	<input value="{{   nav.finish.strftime('%d/%m/%Y')   }}" placeholder="" type="text" 
+		name="finish" onFocus="displayCalendar(form.finish,'dd/mm/yyyy',this)" size = "10"/>
+	<br><br>
+        <input type="hidden" name="pk" id="pk" value="" />
+	<input type="hidden" name="info" id="info" value="" />
+	<input type="button"  onClick="return PassCheck(this.form);" value="Find" />
+  </form>
+
+
+  </div>
+
+{%if display.nat and display.nat.count() > 0 %}
+<div class="messages module">
+	{% include 'basictable.html' %}
+</div>
+{% else %}
+<div class="tdesc">
+   <h4> 
+	{%if display.nid %}
+	No records found for patient {{display.nid}} between {{nav.start.strftime('%d/%m/%Y')}} and {{nav.finish.strftime('%d/%m/%Y')}}
+	{%endif%}
+   </h4>
+</div>
+{%endif%}
+
+
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/jquery.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/autocomplete.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/facebox.js"></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+      $('a[rel*=facebox]').facebox({
+        loading_image : '{{ static_path }}/javascripts/facebox/loading.gif',
+        close_image   : '{{ static_path }}/javascripts/facebox/closelabel.gif'
+      }) 
+    })
+
+
+</script>  
+
+<script type="text/javascript"> 
+
+function PassCheck(form1)
+	{ 
+	if(form1.nid.value=="" || form1.nid.value.length != 16 || isNaN(form1.nid.value) )
+	{
+	alert("Get in the Valid National ID.");
+	form1.nid.focus();
+	return false;
+	}
+	else
+	{
+		form1.submit();
+	}
+    }
+</script>
+
+
+{%  endblock  %}

@@ -1,0 +1,12 @@
+undescore.py
+===============
+replace the following line from _group(self, obj, val, behavior):
+
+if len(ns.result) == 1:
+            return ns.result[0]
+by:
+
+if len(ns.result) == 1:
+            try:	return ns.result[0]
+	    except: pass
+==============================================================================

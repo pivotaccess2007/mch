@@ -1,0 +1,91 @@
+{%  extends "novabase.html" %}
+{%  block title %}Users{%  endblock  %}
+{%  block subtitle %} Users statistics {%  endblock  %}
+
+{% block menu %}
+ 	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>     
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus = ["group"]) }}'>Group messaging</a></li>
+
+{% endblock %}
+
+
+{%  block mainpart  %}
+	<div class="module humblecontainer">
+		<h2>Send Group Message</h2>
+		<form method="POST" class="smsform">
+		{% if display.message %}
+		<h4> &#187; {{ display.message }}</h4>
+		{% endif %}
+		<textarea id = "text" name ="text" cols="125" rows="10"></textarea>
+		<br><br>
+		
+		<label id="role">Select Group: </label>
+		<select name="group" id="group"><option value='all'>All</option>
+		{%for x in display.roles%}
+		<option value={{x.indexcol}}> {{x.name}}</option>
+		{%endfor%}   
+		</select>
+		<br><br>
+
+		<input id="send" type="button"  value="Send Messages" />
+		<br><br>
+
+		</form>
+
+
+	</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$('#send').click(function(evt){	
+		if($('#text').attr('value').trim() == "")
+			{
+			alert("You cannot send empty message, Please type something important!");
+			return false;
+			}
+
+		else
+		{
+		 
+		path = window.location.pathname +  '?group=' + $('#group').attr('value')+ '&send=SEND'+ '&text=' +$('#text').attr('value');
+		if ($('#locchoose').attr('value')) path += '&hc=' + $('#locchoose').attr('value');
+		if ($('#hdchoose').attr('value')) path += '&hd=' + $('#hdchoose').attr('value');
+		if ($('#provchoose').attr('value')) path += '&province=' + $('#provchoose').attr('value');
+		if ($('#distchoose').attr('value')) path += '&district=' + $('#distchoose').attr('value');
+		window.location = path; 
+		}
+	    });
+
+
+});
+
+</script>
+
+{%  endblock  %}

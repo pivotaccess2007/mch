@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RapidSMS • {%  block title %}  Welcome {%  endblock  %}</title>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    {#  <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/{%  if  nav.kw.get('format') == 'reports' %}samples{%  else  %}subjectivised{%  endif %}.css" /> #}
+    
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/layout.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/menu.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/deeper.css" />
+    <link rel="stylesheet" type="text/css" href="{{ static_path }}/stylesheets/table.css" />
+    
+     <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+       <script src="{{ static_path }}/javascripts/jquery-1.7.1.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <script src="{{ static_path }}/javascripts/clientside.js" type="text/javascript"></script>
+    <script src="{{ static_path }}/javascripts/samples.js" type="text/javascript"></script> 
+	<script src="{{ static_path }}/javascripts/zdmin.js"></script>
+	<script src="{{ static_path }}/javascripts/deactivate.js"></script>
+	<script src="{{ static_path }}/javascripts/locations.js"></script>
+	
+    <script>
+    	$(function()
+    	{
+    		
+    		
+    		
+    		$('.datapoint').each(function(ix, dtp)
+    		{
+    			  	//console.log( ix + ": " + dtp );
+    			  var ndpt	=	$(dtp);
+    			  ndpt.hover(function(evt)
+    					  {
+    				  		var mo = $('.moreoptions', this);
+    				  		//var deep = $('.triangle-border', this);
+    				  		$(mo).removeClass('startshidden');
+    				  		//$(deep).removeClass('startshidden');
+    					  },
+    					  function(evt)
+    					  {
+    						var mo = $('.moreoptions', this);
+    						$(mo).addClass('startshidden');
+    					  });
+			});
+    		$('.dropdownlink').click(function(evt){
+    			swaps   = {none: 'block', block:'none'},
+    			now	    = $('.triangle-border ').css('display');
+    			if(now == 'none')
+    			{
+  			  $('.triangle-border ').css({'display':swaps[now]});
+    			}
+    			else $('.triangle-border ').css({'display':swaps[now]});
+			 });
+    		
+    		$('tbody tr').hover(function() {
+    			  $(this).addClass('odd');
+    			}, function() {
+    			  $(this).removeClass('odd');
+    			});
+    	});
+    	
+    	$(document).ready(function(){
+			
+			 $(".cssmenu ul .home").hover(function(){
+				   $(".cssmenu ul ul ").css("display","block");
+			   },function(){
+				   $(".cssmenu ul ul").css("display","none");
+				 });
+
+		});
+    	
+	</script>    
+  </head>
+  <body>
+    <div id="top">
+   
+      <div id="header">
+        <div id="nom1">
+          <div id="ministry">
+            <img src="{{  static_path }}/images/rwanda.png" />
+          </div>
+          <div id="rapid">
+            <img src="{{  static_path }}/images/rapid.png" />
+            </div>
+            <div id="unicef">
+            <img src="{{  static_path }}/images/unicef1.png" />
+          </div>
+          <div id="motto"></div>
+        </div>
+        <div id="langs1">
+          <ul>
+            <li>English</li>
+            <li>Kinyarwanda</li>
+            <li>Français</li>
+          </ul>
+        </div>
+        {%  block topstrip  %}
+
+        <div id='cssmenu' class="cssmenu">
+        <ul class="cssmenu">
+          <li class="home">
+            <a href="/dashboards/home"><span>Home</span></a>
+           <ul>
+		   <li class="{%  if  ref == 'pregnancy' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("predash") }}'><span>Pregnancies</span></a></li>
+		   <li class="{%  if  ref == 'anc' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("nbcdash") }}'><span>New Borns</span></a></li>
+		   <li class="{%  if  ref == 'brithreport' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("ccmdash") }}'><span>Child Health</span></a></li>
+		   <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("vaccination") }}'><span>Post Natal</span></a></li>
+		   <li class="{%  if  ref == 'vaccination' %} active{%  endif %}"><a href='/dashboards/{{ nav.link("nutrition") }}'><span>Nutrition</span></a></li>
+  		   </ul>
+       </li>
+          {% block menu %}
+          
+          {% endblock %}
+          </ul>
+        </div>
+        <div id="subtitle">
+          <div id="mainhead"><a href="/dashboards/{{ ref }}">{%  block subtitle %}{% endblock  %}</a></div>
+          <div id="extrainfo">{%  block extrainfo %}
+           <a href="{{ nav.link(ref)  }}"> <div id="filteredLocation">{{ nav }}</div></a>
+            <div id="filteredDate">
+                {{  nav.start.strftime("%A %d %B %Y") }}-{{  nav.finish.strftime("%A %d %B %Y") }}
+              </div>
+            
+            <div class="count">{{  (1 + (nav.finish - nav.start).days)|neat_numbers }} Days</div>
+          {% endblock  %}</div>
+        </div>
+        <div id="filter">
+          <form id="dateranges">
+            
+              {%  include "dater.html"  %}
+              {%  include "hlocator.html"  %}
+            
+            <input type="submit" value="Refresh" />
+          </form>
+
+          <form id="myform">
+		<input type="checkbox" name="ca" onchange="chgtx();" />
+		<select name="province" id="provchoose" onChange="changeDistrict(this.value);"><option> Select Province</option> </select>
+		<input type="checkbox" name="cb" onchange="chgty();" />
+		<select name="district" id="distchoose" onChange="changeLocation(this.value);"><option >  </option>  </select>
+		<input type="checkbox" name="cc" onchange="chgtz();" />
+		<select name="hc" id="locchoose"><option > </option></select> 
+        <input type="submit" value="Refresh" />
+          </form>
+        </div>
+      </div>
+      
+</div>
+
+
+
+
+
+ <div class="navigator">
+	<div class="central">
+    <div class="position">
+
+     <li><a href="/">  Home</a></li>
+{% block position %}{% endblock %}
+
+</div>
+      
+      
+      <div class="view">
+      <div class="tabular {% if view == 'log' %} active {% endif %} "><a href="/tables/{{ nav.link(ref, view = 'log', minus = ['summary']) }}">Log</a></div>
+      <div class="tabular {% if view == 'table'%} active {% endif %}"><a href="/tables/{{ nav.link(ref, summary = 'on', view = 'table')}}">Table</a></div>
+      <div class="graphic {% if view == 'graphic' %} active {% endif %}"><a href="/dashboards/{{ nav.link(ref, view = 'graphic', minus = ['summary'])}}">Graphic</a></div>
+{{ ref }}
+      </div>
+	</div>
+	</div>
+      
+
+      <div id="main">
+      {%  endblock  %}
+      <div id="trunk"{% block trunkstyle  %}  style="background: url('{{  static_path }}/images/preg.jpg') fixed center no-repeat"{% endblock  %}>
+        {%  block mainpart  %}
+          {{  static_path }}
+        {%  endblock  %}
+      </div>
+      </div>
+      <div id="footer">
+        <div id="footerblueline"><img src="{{ static_path }}/images/Layer16.png"></div>
+			<div id="ContactUsReachouttou">
+			<strong>Contact Us</strong>
+			<br/>Reach out to us if you have any 
+			questions or queries regarding 
+			information on rapid SMS 
+			contact us using the information
+			below:
+			<br><br>
+			+250 78123456<br>
+			+250 73123456
+			<br><br>
+			info@rapidsms.gov.rw
+			rapidsms@unicef.com
+			</div>
+			<div id="FollowusonSocialNetw">
+			<strong>Follow us</strong>
+			<br></>Follows us on our soical networks and comment, interact and socailise with our community
+			</div>
+			<div id="social"><img src="{{ static_path }}/images/Layer17.png"></div>
+			<div id="uniceflogo"><img src="{{ static_path }}/images/Layer18.png"></div>
+			<div id="rapidsmsfooterlogo"><img src="{{ static_path }}/images/Layer19.png"></div>
+			<div id="ministrylogo"><img src="{{ static_path }}/images/Layer20.png"></div>
+			<!--  -->
+        
+      </div>
+    
+
+
+
+  </body>
+</html>

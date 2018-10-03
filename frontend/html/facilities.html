@@ -1,0 +1,205 @@
+{%  extends "novabase.html" %}
+{%  block title %}Facilities{%  endblock  %}
+{%  block subtitle %} Facilities {%  endblock  %}
+
+{% block menu %}
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite", minus=["factype"] ) }}'><span>Admin Site</span></a>
+          </li>
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("facilities", view= "graphic", minus = ["factype"]) }}'>Facilities</a></li>
+{% if display.factype %}
+<li> &#187; {% if display.factype == 'hc' %}Health Centre{%else%}District Hospital{%endif%}</li>
+{% endif %}
+{% endblock %}
+
+
+{%  block mainpart  %}
+<div class="smallcontainer" style="padding-top:50px;">
+
+	 <img class="icon" 
+		src="{{  static_path }}/images/{% if display.factype == 'hc' %}At Health Centre.png{%else%}At Hospital.png{%endif%}"
+	 />
+    <div class="infoname" style="font-size: 20px;">
+	Total Number of {% if display.factype == 'hc' %}Health Centre{%else%}District Hospital{%endif%}
+    </div>
+    <div class="moretotal" >
+	<a href="{{ nav.link('/tables/facilities', factype=display.factype, summary = 'on')}}">View by Location</a>
+    </div>
+    <div class="infodata goodnum">
+      <a href="{{ nav.link('/tables/facilities', factype=display.factype)}}">{{display.nat[0]['total']|neat_numbers}}</a>
+    </div>
+
+
+
+  </div>
+  </div>
+  
+  <div class="humblecontainer">
+  
+<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">
+	New {% if display.factype == 'hc' %}Health Centre{%else%}District Hospital{%endif%} registration form
+</div>
+<form method="POST" class="regform">
+	{% if display.message %}
+		<label style="color:blue;">{{display.message}}</label>
+	{%endif%}
+	<br><br>
+
+	<label id="facnl">Name Of {% if display.factype == 'hc' %}Health Centre{%else%}District Hospital{%endif%}: </label>
+	<input type="text" name="facname" id="facname" value="" class="ac_input">
+	<br><br>
+	<label id="faccl">FOSA Code Of {% if display.factype == 'hc' %}Health Centre{%else%}District Hospital{%endif%}: </label>
+	<input type="text" name="faccode" id="faccode" value="" class="ac_input">
+	<br><br>
+	<label> Province: </label>
+	<input type="hidden" name="ftype" id="ftype" value="{{display.factype}}" />
+	<input type="hidden" name="fac_nation" id="fac_nation" value="" />
+	<select name="fac_province" id="fac_province"> <option></option>
+	{% for prv in  display.locs['provinces'] %}<option value="{{prv.province_pk}}">{{prv.province_name}} </option> {%endfor%} 
+	</select>
+	<br><br>
+
+	<label> District: </label>
+	<select name="fac_district" id="fac_district"> <option></option>
+	{% for dst in  display.locs.districts %}<option value="{{dst.district_pk}}">{{dst.district_name}} </option> {%endfor%} 
+	</select>
+	<br><br>
+	{% if display.factype == 'hc' %}
+	<label id="referral">Referral Hospital: </label>
+	<select name="fac_hospital" id="fac_hospital"><option></option>
+	{% for hd in  display.locs.hospitals %}<option value="{{hd.referral_facility_pk}}" >{{hd.referral_name}} </option> {%endfor%}
+	</select> 
+	<br><br>
+	{%endif%}
+
+	<label >Sector: </label>
+	<select name="fac_sector" id="fac_sector"><option></option>
+	{% for sec in  display.locs.sectors %}<option value="{{sec.indexcol}}" >{{sec.name}} </option> {%endfor%}
+	</select> 
+	<br><br>
+	<input type="button"  onClick="return PassCheck(this.form);" value="Register" />
+  </form>
+
+
+  </div>
+
+<script type="text/javascript">
+
+//AMB autocomplete
+$().ready(function() {
+//alert("OK");
+$.getJSON( "/filter_locs", {loctype: "prv", locparentid: 1}, function( result ){
+				//alert(JSON.stringify(result));
+				document.getElementById("fac_province").options.length=0;
+				for ( var i=0; i<result.length; i++ ){
+							province = result[i];							
+							document.getElementById('fac_province').options[i+1] = new Option(
+									province.name, province.indexcol);
+							}
+		});
+
+
+$('#fac_province').change(function(evt){   
+		var value = $(this).attr('value');  //alert("PRV: " + value);
+		var selected_dsts = _.filter(districts, function(item) { 
+							//alert( value+", "+ item.province_pk+", "+ item.nation_pk +", "+ item.district_pk)
+									document.getElementById('fac_nation').value = item.nation_pk;
+									 return item.province_pk == value;  }); 
+		//alert(JSON.stringify(selected_dsts));
+		//alert(selected_dsts.length);
+		document.getElementById("fac_district").options.length=0;
+		for ( var i=0; i<selected_dsts.length; i++ ){ 
+				dst = selected_dsts[i];
+				document.getElementById('fac_district').options[i+1] = new Option(dst.district_name, dst.district_pk);
+							}
+
+		});
+
+$('#fac_district').change(function(evt){   
+		var value = $(this).attr('value');  //alert("DIST: " + value);
+		$.getJSON( "/filter_locs", {loctype: "sec", locparentid: value}, function( result ){
+				//alert(JSON.stringify(result));
+				document.getElementById("fac_sector").options.length=0;
+				for ( var i=0; i<result.length; i++ ){
+							sector = result[i];							
+							document.getElementById('fac_sector').options[i+1] = new Option(
+									sector.name, sector.indexcol);
+							}
+		}); 
+		
+		var selected_hps = _.filter(hps, function(item) {  return item.district_pk == value;  }); 
+		//alert(JSON.stringify(selected_hps));
+		document.getElementById("fac_hospital").options.length=0;
+		for ( var i=0; i<selected_hps.length; i++ ){ 
+				hd = selected_hps[i];
+			document.getElementById('fac_hospital').options[i+1] = new Option(hd.referral_name, hd.referral_facility_pk);
+							}
+		
+		});
+
+});
+
+
+
+function PassCheck(form1)
+	{
+
+	if( form1.ftype.value == 'hc'){
+		if ( form1.fac_hospital.value == "" || isNaN(form1.fac_hospital.value)){
+			alert("Select Referral Hospital.");
+			form1.fac_hospital.focus();
+			return false;
+		}
+	}
+ 
+	if(form1.facname.value=="")
+	{
+		alert("Get in the Valid Facility name please.");
+		form1.facname.focus();
+		return false;
+	}else if( form1.faccode.value == "" || isNaN(form1.faccode.value))
+	{
+		alert("Get in the Valid FOSA code please.");
+		form1.faccode.focus();
+		return false;
+	}	
+	else if( form1.fac_province.value == "" || isNaN(form1.fac_province.value))
+	{
+		alert("Select province.");
+		form1.fac_province.focus();
+		return false;
+	}
+	else if( form1.fac_district.value == "" || isNaN(form1.fac_district.value))
+	{
+		alert("Select district.");
+		form1.fac_district.focus();
+		return false;
+	} 
+	else
+	{	form1.submit();
+	}
+    }
+</script>
+{%  endblock  %}

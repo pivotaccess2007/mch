@@ -1,0 +1,22 @@
+<table width="100%"> 
+    <thead>
+	
+        <tr>
+	    <th>Date</th>
+            <th>Reporter</th>
+	    <th>Village</th>
+	    <th>Cell</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{% for msg in display.nat %}
+            <tr>
+            	<td>{{msg}}</td>
+                
+		
+            </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>

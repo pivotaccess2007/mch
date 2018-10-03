@@ -1,0 +1,211 @@
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=PRE+0788660270010918+09.01.2018+5.9.2018+2+1+gs+yg+ol+ma+hc+wt58.5+ht89+to+hw+muac23.05'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250788660270&text=BIR+0788660270010918+01+04.09.2018+bo+np+hc+bf1+wt58.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RED+0782904295060917+LA+HO+wt55.5'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=WHO'
+
+
+from controller.main import *
+from util.mch_connection import MCONN, MCONN1, PCONN, orm, INC_ID
+email = 'user1919@mch.moh.gov.rw'
+#password = '2942572' # prod
+password = '2942263' # test
+auth = MchAuth(email = email, password = password)
+ctrl = RSMSRWController(auth)
+ctrl, auth = (ctrl, ctrl.auth)
+navb, locs    = ctrl.navigate(auth, {}, {})
+facs = locs.get('facilities')
+nats = UNDERSCORE(facs).chain().indexBy(lambda x, *args: x.nation_pk).map(lambda x, *args: x).sortBy().value()
+nat = orm.ORM.query("ancvisit")
+navb.pages(nat, limit=2)
+
+
+from controller.main import *
+from util.mch_connection import MCONN, MCONN1, PCONN, orm, INC_ID
+email = 'd.zigama@pivotaccess.com'
+password = '123'
+auth = MchAuth(email = email, password = password)
+ctrl = RSMSRWController(auth)
+ctrl, auth = (ctrl, ctrl.auth)
+navb, locs    = ctrl.navigate(auth, {}, {})
+facs = locs.get('facilities')
+nats = UNDERSCORE(facs).chain().indexBy(lambda x, *args: x.nation_pk).map(lambda x, *args: x).sortBy().value()
+nat = orm.ORM.query("ancvisit")
+navb.pages(nat, limit=2)
+
+
+from controller.pregnancies import *
+from util.mch_util import *
+
+cnds = {"(created_at) <= '2018-03-26 11:23:09.778040'": '', "(lmp + INTERVAL '270 days') >= '2018-03-26 11:23:09.778040'": ''}
+
+INDICS = [('no_risk', 'prev_pregnancy_gs IS NULL AND prev_pregnancy_mu IS NULL AND prev_pregnancy_hd IS NULL AND prev_pregnancy_rm IS NULL AND prev_pregnancy_ol IS NULL AND prev_pregnancy_yg IS NULL AND prev_pregnancy_kx IS NULL AND prev_pregnancy_yj IS NULL AND prev_pregnancy_lz IS NULL AND symptom_vo IS NULL AND symptom_pc IS NULL AND symptom_oe IS NULL AND symptom_ns IS NULL AND symptom_ma IS NULL AND symptom_ja IS NULL AND symptom_fp IS NULL AND symptom_fe IS NULL AND symptom_ds IS NULL AND symptom_di IS NULL AND symptom_sa IS NULL AND symptom_rb IS NULL AND symptom_hy IS NULL AND symptom_ch IS NULL AND symptom_af IS NULL'), ('at_risk', '(symptom_vo IS NOT NULL OR symptom_pc IS NOT NULL OR symptom_oe IS NOT NULL OR symptom_ns IS NOT NULL OR symptom_ma IS NOT NULL OR symptom_ja IS NOT NULL OR symptom_fp IS NOT NULL OR symptom_fe IS NOT NULL OR symptom_ds IS NOT NULL OR symptom_di IS NOT NULL OR symptom_sa IS NOT NULL OR symptom_rb IS NOT NULL OR symptom_hy IS NOT NULL OR symptom_ch IS NOT NULL OR symptom_af IS NOT NULL) AND NOT (prev_pregnancy_gs IS NOT NULL OR prev_pregnancy_mu IS NOT NULL OR prev_pregnancy_hd IS NOT NULL OR prev_pregnancy_rm IS NOT NULL OR prev_pregnancy_ol IS NOT NULL OR prev_pregnancy_yg IS NOT NULL OR prev_pregnancy_kx IS NOT NULL OR prev_pregnancy_yj IS NOT NULL OR prev_pregnancy_lz IS NOT NULL)'), ('high_risk', 'prev_pregnancy_gs IS NOT NULL OR prev_pregnancy_mu IS NOT NULL OR prev_pregnancy_hd IS NOT NULL OR prev_pregnancy_rm IS NOT NULL OR prev_pregnancy_ol IS NOT NULL OR prev_pregnancy_yg IS NOT NULL OR prev_pregnancy_kx IS NOT NULL OR prev_pregnancy_yj IS NOT NULL OR prev_pregnancy_lz IS NOT NULL'), ('toilet', "LOWER(toilet) = 'to'"), ('handwash', "LOWER(handwash) = 'hw'"), ('notoilet', "LOWER(toilet) = 'nt'"), ('nohandwash', "LOWER(handwash) = 'nh'")]
+
+#group_by = ['province_pk']
+#group_by = ['province_pk', 'district_pk']
+#group_by = ['province_pk', 'district_pk', 'referral_facility_pk']
+group_by = ['province_pk', 'district_pk', 'referral_facility_pk', 'facility_pk']
+
+locateds = Pregnancy.fetch_pregnancies_by_location(cnds, group_by = group_by, INDICS = INDICS)
+
+province = navb.user.province_pk ; district = navb.user.district_pk; hospital = navb.user.referral_facility_pk; location = navb.user.facility_pk
+
+LOCS = { 'nation': None, 'province': province, 'district': district, "hospital": hospital, 'location': location }
+
+llocs = get_initial_locations(locs, LOCS = {})
+
+indics = [ makecol(x) for x in [y[0] for y in INDICS] ]
+
+heads = get_heading_cols(HEADERS = indics, LOCS = LOCS)
+
+data = get_initial_data(indics_cols = indics, locs = llocs)
+
+tabular = give_me_table(locateds, locs, INDICS = INDICS, LOCS = LOCS)
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=SMN+0782904295060917+DHM+AL1'
+
+curl -s -D/dev/stdout 'http://127.0.0.1:5000/backend/kannel-smpp/?id=%2B250782904295&text=RSO+RDT+AL1'
+
+
+from model.enduser import Enduser
+from service.malaria.sm import *
+#text = "SMR 1197458698761537 DHM NFM JAM SCM PRM ANM RVM  "
+#text = "SMR 1197458698761530 DHM NFM JAM SCM PRM ANM RVM WUM PR AL NA AT CA HO DTH NR "
+#text = "SMN 1197458698761533 AL3 AL1"
+#text = "SMN"
+#text = 'SMN 1197458698761537 DHM NFM RDM HEM AL1 COM UNM SCM PRM ANM RVM WUM RDT ARS AL4 JAM AL2 AL3'
+#text = 'SMN 1197458698761535 DHM NFM RDM HEM COM UNM SCM PRM ANM RVM WUM TDR ARS AL4 AL2 AL3'
+#text = 'SMN 1198470164047035 WUM COM'
+user = Enduser.get_active_user('+250782941132')
+sm = SM(user, text)
+report = sm.get_report()
+response = sm.get_response()
+sm.send_notifications()
+print report, response, sm.errors
+sm.process()
+
+from model.enduser import Enduser
+from service.malaria.sm import *
+#text = "SMR 1197458698761537 DHM NFM JAM SCM PRM ANM RVM  "
+text = "SMR 1197458698761530 DHM NFM JAM SCM PRM ANM RVM WUM PR AL NA AT CA HO DTH NR "
+#text = "SMN 1197458698761533 DHM NFM JAM SCM PRM ANM RVM WUM NDM"
+#text = 'SMN 1197458698761537 DHM NFM RDM HEM AL1 COM UNM SCM PRM ANM RVM WUM RDT ARS AL4 JAM AL2 AL3'
+#text = "SMN 1197458698761533 NDM"
+text = "SMN 1197458698761533 DHM TDR"
+user = Enduser.get_active_user('+250782952794')
+sm = SM(user, text)
+report = sm.get_report()
+response = sm.get_response()
+sm.send_notifications()
+print report, response, sm.errors
+sm.process()
+
+from model.enduser import Enduser
+from service.notification.who import *
+text = "WHO"
+user = Enduser.get_active_user('+250782941132')
+who = WHO(user, text)
+response = who.get_response()
+print response
+who.process()
+
+
+from service.reminder.reminders import Reminder
+cmd = Reminder(ntype = "SMN Reminder")
+nots = cmd.get_severe_malaria_notifications_15_mins_ago()
+cmd.send_reminders(nots)
+
+
+from model.enduser import Enduser
+from service.stock.st import *
+text = "RSO TDR ARS AL4 AL2 AL3"
+#text = "SO RDT ARS AL4 AL2 AL3"
+text = "SS RDT ARS AL4 AL2 AL3"
+user = Enduser.get_active_user('+250782952794')
+st = ST(user, text)
+report = st.get_report()
+response = st.get_response()
+print report, response, st.errors
+st.process()
+
+            if self.get_sm_notif() and self.keyword in ['SMN']:
+                self.errors.append(('unresponded_report', self.national_id))
+                response = RESPONSE['unresponded_report'][self.chw.language_code.lower()] % {'nid': self.national_id}
+            if self.get_sm_result() and self.keyword in ['SMR']:
+                self.errors.append(('report_to_respond', self.national_id))
+                response = RESPONSE['report_to_respond'][self.chw.language_code.lower()] % {'nid': self.national_id}
+
+
+    def get_sm_notif(self):
+        smn = None
+        try:
+            smn = fetch_sm(self.national_id,filters = {'keyword = %s' : 'SMN', 'sms_date = %s': self.sms_date})
+            return smr
+        except Exception, e:
+            pass
+        return smn
+
+    def get_sm_result(self):
+        smr = None
+        try:
+            smr = fetch_sm(self.national_id,filters = {'keyword = %s' : 'SMR', 'sms_date = %s': self.sms_date})
+            return smr
+        except Exception, e:
+            pass
+        return smr
+
+
+
+from sms.api.messaging.handlers.smshandler import *
+text = "SMN 0782904295060917 DHM AL1"
+identity = "+250782904295"
+SMSReportHandler.test(text, identity)
+
+
+from sms.api.messaging.handlers.smshandler import *
+text = "RSO RDT AL1"
+identity = "+250782904295"
+SMSReportHandler.test(text, identity)
+
+
+ ASM  Village
+ Binome village
+ Cell Coordinator Cell
+ Supervisor HD, HC
+ Monitor & Evaluator HD
+ Data Manager HD, HC
+ Hospital Director HD ==> Hospital Director General
+ Ambulance Coordinator ==> Logistics HD
+ Chief of Nursing ==> Director of Nursing HD
+ Chief of Medical Staff ==> Clinical director HD
+ Head of HC == Head of health centre HC
+ Clinician == HD, HC
+ 
+ 
+ Administrator == [Baptiste, David]
+ Headquarter Staff
+
+
+
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (1, current_timestamp, current_timestamp, 'ASM', 'ASM');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (2, current_timestamp, current_timestamp, 'Binome', 'BINOME');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (3, current_timestamp, current_timestamp, 'Cell Coordinator', 'CECO');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (4, current_timestamp, current_timestamp, 'Supervisor', 'SUP');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (5, current_timestamp, current_timestamp, 'Monitor & Evaluator', 'MNE');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (6, current_timestamp, current_timestamp, 'Data Manager', 'DTM');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (7, current_timestamp, current_timestamp, 'Logistics', 'LOG');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (8, current_timestamp, current_timestamp, 'Head of Health Centre', 'HOHC');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (9, current_timestamp, current_timestamp, 'Clinician', 'CLN');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (10, current_timestamp, current_timestamp, 'Director of Nursing', 'DNUR');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (11, current_timestamp, current_timestamp, 'Clinical Director', 'DCLN');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (12, current_timestamp, current_timestamp, 'Hospital Director General', 'HODI');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (13, current_timestamp, current_timestamp, 'Headquarter Staff', 'HQ');
+INSERT INTO role (indexcol, created_at, updated_at, name, code) VALUES (14, current_timestamp, current_timestamp, 'Administrator', 'ADMIN');
+
+
+
+
+
+

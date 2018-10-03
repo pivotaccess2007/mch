@@ -1,0 +1,156 @@
+{%  extends "novabase.html" %}
+
+{%  block subtitle %} Error Prone {%  endblock  %}
+{%  block trunkstyle  %} style="background: url('{{ static_path }}/images/anc.jpg') no-repeat fixed center"{%  endblock  %}
+
+{% block menu %}
+ <li class="homelink">
+            <li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite", minus=["factype"]) }}'><span>Admin Site</span></a>
+          </li> 
+          
+{% endblock %}
+
+
+{% block position %}
+
+<li>&#187; <a href="/dashboards/deliverydash">Errors</a></li>
+
+<li>&#187; {{ display.desc  }}</li>
+{% endblock %}
+
+
+
+{%  block mainpart  %}
+  {% if display.locateds and not display.tabular %} 
+	<div>
+		<table class="locationtable"> 
+		   <theader>
+			{% if display.locateds[0].province_name %}<th>Province</th> {% endif %}
+			{% if display.locateds[0].district_name %}<th>District</th> {% endif %}
+			{% if display.locateds[0].referral_facility_name %}<th>Hospital</th> {% endif %}
+			{% if display.locateds[0].facility_name %}<th>HealthCentre</th> {% endif %}   
+			<th>Total</th>
+		   </theader>
+			{% for lc in display.locateds %} 
+			   <tr>
+				{% if lc.province_name %}<td><a href="#" onclick="addInURL('province', {{lc.province_pk}});">{{lc.province_name}}</a></td> {% endif %}
+				{% if lc.district_name %}<td><a href="#" onclick="addInURL('district', {{lc.district_pk}});">{{lc.district_name}}</a></td> {% endif %}
+				{% if lc.referral_facility_name %}<td><a href="#" onclick="addInURL('hd', {{lc.referral_facility_pk}});">{{lc.referral_facility_name}}</a></td> {% endif %}
+				{% if lc.facility_name %}<td><a href="#" onclick="addInURL('hc', {{lc.facility_pk}});">{{lc.facility_name}}</a></td> {% endif %}   
+				<td><a href="#" onclick="getTotal( {%if 'province_pk' in display.tabular.heads and dt[display.tabular.heads.index('province_pk')]['province_pk'] %}
+					{{dt[display.tabular.heads.index('province_pk')]['province_pk'] }} {%else%}''{%endif%}, 
+					{%if 'district_pk' in display.tabular.heads and dt[display.tabular.heads.index('district_pk')]['district_pk'] %}
+					{{dt[display.tabular.heads.index('district_pk')]['district_pk'] }} {%else%}''{%endif%},
+					{%if 'referral_facility_pk' in display.tabular.heads and dt[display.tabular.heads.index('referral_facility_pk')]['referral_facility_pk'] %}
+					{{dt[display.tabular.heads.index('referral_facility_pk')]['referral_facility_pk'] }} {%else%}''{%endif%},
+					{%if 'facility_pk' in display.tabular.heads and dt[display.tabular.heads.index('facility_pk')]['facility_pk'] %}
+					{{dt[display.tabular.heads.index('facility_pk')]['facility_pk'] }} {%else%}''{%endif%},
+					{% if h in [ 'no_risk', 'at_risk', 'high_risk', 'nohandwash', 'handwash', 'notoilet','toilet'] %}group='{{h}}'{%else%} group=''{% endif %},
+					{% if h != '' and h != 'total' and h not in ['no_risk', 'at_risk', 'high_risk', 'nohandwash', 'handwash', 'notoilet','toilet'] %}subcat='{{h}}'{%else%} subcat=''{% endif %} );">{{lc.total}}</a></td>
+			   </tr>
+			{% endfor %}
+		</table>
+	</div>
+
+  {%else%}
+	{% if display.tabular %}
+	<div>
+		<table class="locationtable"> 
+		   <theader>
+			{% for h in display.tabular.heads %} 
+				{% if h == 'province_name' %} <th>Province</th>
+				{% else %}
+					{% if h == 'district_name' %}	<th>District</th>
+					{% else %}
+						{% if h == 'referral_facility_name' %} <th>Hospital</th>
+						{% else %}
+						{% if h == 'facility_name' %} <th>HealthCentre</th>
+						{% else %}
+					{% if h == 'province_pk' or h == 'district_pk' or h == 'referral_facility_pk' or h == 'facility_pk' %} 
+							{% else %}<th>{{display.INDICS_HEADERS[h] or 'Total'}}</th>
+							{% endif %}
+						     {% endif %}
+						{% endif %}
+					{% endif %}
+				{% endif %} 
+				
+			{% endfor %}
+		   </theader>
+			{% for dt in display.tabular.data %} 
+			   <tr>
+				{% for h in display.tabular.heads %}
+					
+					{% if h == 'province_name' %} 
+						<td><a href="#" onclick="addInURL('province', {{dt[display.tabular.heads.index('province_pk')]['province_pk']}});">
+							{{ dt[display.tabular.heads.index(h)][h] }}</a></td>
+					{% else %}
+						{% if h == 'district_name' %}
+						<td>
+						<a href="#" onclick="addInURL('district', {{dt[display.tabular.heads.index('district_pk')]['district_pk']}});">
+						{{ dt[display.tabular.heads.index(h)][h] }}</a></td>
+						{%else%}
+						{% if h == 'referral_facility_name' %}
+						<td>
+						<a href="#" onclick="addInURL('hd', {{dt[display.tabular.heads.index('referral_facility_pk')]['referral_facility_pk']}});">
+						{{ dt[display.tabular.heads.index(h)][h] }}</a></td>
+						{% else %} 
+							{% if h == 'facility_name' %}
+							<td>
+							<a href="#" onclick="addInURL('hc', {{dt[display.tabular.heads.index('facility_pk')]['facility_pk']}});">
+							{{ dt[display.tabular.heads.index(h)][h] }}</a></td>
+							{% else %}
+					{% if h == 'province_pk' or h == 'district_pk' or h == 'referral_facility_pk' or h == 'facility_pk' %} 
+								{% else %}
+								<td>
+								<a href="#" 
+								onclick="getTotal(
+					{%if 'province_pk' in display.tabular.heads and dt[display.tabular.heads.index('province_pk')]['province_pk'] %}
+					{{dt[display.tabular.heads.index('province_pk')]['province_pk'] }} {%else%}''{%endif%}, 
+					{%if 'district_pk' in display.tabular.heads and dt[display.tabular.heads.index('district_pk')]['district_pk'] %}
+					{{dt[display.tabular.heads.index('district_pk')]['district_pk'] }} {%else%}''{%endif%},
+					{%if 'referral_facility_pk' in display.tabular.heads and dt[display.tabular.heads.index('referral_facility_pk')]['referral_facility_pk'] %}
+					{{dt[display.tabular.heads.index('referral_facility_pk')]['referral_facility_pk'] }} {%else%}''{%endif%},
+					{%if 'facility_pk' in display.tabular.heads and dt[display.tabular.heads.index('facility_pk')]['facility_pk'] %}
+					{{dt[display.tabular.heads.index('facility_pk')]['facility_pk'] }} {%else%}''{%endif%},
+					{% if h in [ 'no_risk', 'at_risk', 'high_risk', 'nohandwash', 'handwash', 'notoilet','toilet'] %}group='{{h}}'{%else%} group=''{% endif %},
+					{% if h != '' and h != 'total' and h not in ['no_risk', 'at_risk', 'high_risk', 'nohandwash', 'handwash', 'notoilet','toilet'] %}subcat='{{h}}'{%else%} subcat=''{% endif %}
+									 );"> 
+						{{ dt[display.tabular.heads.index(h)][h] }} </a></td>
+								{% endif %}
+							     {% endif %}
+							{% endif %}
+						{% endif %}
+					{% endif %} 
+
+					
+				{% endfor %}										
+			   </tr>	
+			{% endfor %}
+		</table>
+	</div>
+	{% else %}
+  		{%  include "basictable.html"  %}
+	{% endif %}
+  {% endif %}
+  
+{%  endblock  %}

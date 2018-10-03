@@ -1,0 +1,219 @@
+{%  extends "basicbabies.html" %}
+{%  block title %}Nutrition {%  endblock  %}
+
+{% block menu %}
+ 		  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("nutrdash", view= "graphic", minus=["group", "subcat"]) }}'><span>Nutrition</span></a>
+          </li><!--
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("grownthcharts", view= "graphic", minus=["group", "subcat"]) }}'><span>Grownth Charts</span></a>
+          </li>-->
+          
+{% endblock %}
+
+{%  block mainpart  %}
+
+  <div class="smallcontainer">
+    <div class="infoname nutritiontext">Total Children</div>
+    <div class="infodata goodnum playable">
+      <a href='{{ nav.link("/tables/nutrdash", minus=["group", "subcat"]) }}'>{{  display.chi_nutr[0]['total']|neat_numbers }}</a>
+    </div>
+    <div class="graphicard">
+      <img class="icon" src="{{  static_path }}/images/nutrition.jpg" />
+    </div>
+
+
+
+<div  style="margin-top:100px;">
+<div class="infoname nutritiontext">Total Pregnant Women</div>
+    <div class="infodata goodnum playable">
+      <a href='{{ nav.link("/tables/predash", minus=["group", "subcat"]) }}'>{{  display.pre_nutr[0]['total']|neat_numbers }}</a>
+    </div>
+    <div class="graphicard">
+      <img class="icon" src="{{  static_path }}/images/pregnancies.jpg" />
+    </div>
+</div>
+ </div>
+
+
+
+  <div class="humblecontainer">
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Breastfeeding within 1 hour</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "bf1")  }}">{{  display.chi_nutr[0]['bf1']|neat_numbers }}</a>
+	</div>
+    </div>
+    
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Exclusive breastfeeding</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "ebf")  }}">{{  display.chi_nutr[0]['ebf']|neat_numbers }}</a>
+	</div>
+    </div>
+    
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Complementary feeding</div>
+    	<div class="number">
+		<a href="{{  nav.link("/tables/nutrdash", group="child", subcat = "cf")  }}">{{  display.chi_nutr[0]['cf']|neat_numbers }}</a>
+	</div>
+    </div>
+    
+    <div class="datapoint nutritioncircle" >
+    <div class="descr">Not Breastfeeding</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "nb")  }}">{{  display.chi_nutr[0]['nb']|neat_numbers }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Underweight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "underweight")  }}">
+		{{  display.chi_nutr[0]['underweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+    <!--
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Stunting</div>
+    <div class="number"><a href="{{ nav.link("/tables/nutrdash", subcat = "stunting")  }}">{{  display.chi_nutr[0]['stunting']|neat_numbers  }}</a></div>
+    </div>
+    
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Wasting</div>
+    <div class="number"><a href="{{ nav.link("/tables/nutrdash", subcat = "wasting")  }}">{{  display.chi_nutr[0]['wasting']|neat_numbers  }}</a></div>
+    </div>
+-->
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Gained Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "gainedweight")  }}">
+		{{  display.chi_nutr[0]['gainedweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Lost Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "lostweight")  }}">
+		{{  display.chi_nutr[0]['lostweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Faltering Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "falteringweight")  }}">
+		{{  display.chi_nutr[0]['falteringweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint reddeathcircle">
+    <div class="descr"> MUAC &lt; 11.5 cm </div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "muacred")  }}">
+		{{  display.chi_nutr[0]['muacred']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapointrisks" style="background: url(../static/images/circleatrisk.png);">
+    <div class="descr"> MUAC 11.5 &ndash; 12.5 cm</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "muacyellow")  }}">
+		{{  display.chi_nutr[0]['muacyellow']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapointrisks" style="background: url(../static/images/circle.png);">
+    <div class="descr"> MUAC &gt; 12.5 cm</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="child", subcat = "muacgreen")  }}">
+		{{  display.chi_nutr[0]['muacgreen']|neat_numbers  }}</a>
+	</div>
+    </div>
+	
+ </div>
+
+
+
+  <div class="humblecontainer"  style="margin-top:100px;">
+    <div class="datapoint nutritioncircle">
+    <div class="descr">PW height less than 150cm </div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "mother_height_less_145")  }}">
+		{{  display.pre_nutr[0]['mother_height_less_145']|neat_numbers  }}</a>
+	</div>
+    </div>
+    
+    <div class="datapoint nutritioncircle">
+    <div class="descr">PW weight less than 50kg</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "mother_weight_less_50")  }}">
+		{{  display.pre_nutr[0]['mother_weight_less_50']|neat_numbers  }}</a>
+	</div>
+    </div>
+    
+    <div class="datapoint nutritioncircle">
+    <div class="descr">PW BMI less than 18.5</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "bmi_less_18_dot_5")  }}">
+		{{  display.pre_nutr[0]['bmi_less_18_dot_5']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Gained Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "gainedweight")  }}">
+		{{  display.pre_nutr[0]['gainedweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Lost Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "lostweight")  }}">
+		{{  display.pre_nutr[0]['lostweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint nutritioncircle">
+    <div class="descr">Faltering Weight</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "falteringweight")  }}">
+		{{  display.pre_nutr[0]['falteringweight']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapoint reddeathcircle">
+    <div class="descr"> MUAC &lt; 18.5 cm </div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "mmuacred")  }}">
+		{{  display.pre_nutr[0]['mmuacred']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapointrisks" style="background: url(../static/images/circleatrisk.png);">
+    <div class="descr"> MUAC 18.5 &ndash; 21.0 cm</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "mmuacyellow")  }}">
+		{{  display.pre_nutr[0]['mmuacyellow']|neat_numbers  }}</a>
+	</div>
+    </div>
+
+    <div class="datapointrisks" style="background: url(../static/images/circle.png);">
+    <div class="descr"> MUAC &gt; 21.0 cm</div>
+    	<div class="number">
+		<a href="{{ nav.link("/tables/nutrdash", group="mother", subcat = "mmuacgreen")  }}">
+		{{  display.pre_nutr[0]['mmuacgreen']|neat_numbers  }}</a>
+	</div>
+    </div>
+	
+  </div>
+
+
+
+{%  endblock  %}

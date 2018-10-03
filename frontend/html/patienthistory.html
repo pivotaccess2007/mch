@@ -1,0 +1,39 @@
+{%  extends "basicmothers.html" %}
+{% block position %}
+
+<li>&#187; <a href="/dashboards/predash">Pregnancy</a></li>
+
+<li>&#187; <a href="{{ nav.link('/tables/patient', pid = pid )}}">Patient</a></li>
+
+<li>&#187; {{ pid }}</li>
+
+{% endblock %}
+
+{%  block mainpart  %}
+
+<h2>Patient</h2>
+{% for report in display.data %}
+
+<h3> {{ report.report[0][0] }} </h3>
+<table width="100%">
+  <thead>
+    <tr>
+      {% for  attr in report.attrs %}<th>{{attr[1]}}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  
+    
+    	{% for data in report.reports.list() %}
+		<tr>
+			{% for  attr in report.attrs %} <td>{{ data[attr[0]] }}</td>{% endfor %}
+		</tr>
+    	{% endfor %}
+  
+  
+ </tbody>
+</table>
+
+{% endfor %}
+
+{%  endblock  %}

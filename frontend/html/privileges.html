@@ -1,0 +1,178 @@
+{%  extends "novabase.html" %}
+{%  block title %}Privileges{%  endblock  %}
+{%  block subtitle %} Privileges {%  endblock  %}
+
+{% block menu %}
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite", minus=["factype"] ) }}'><span>Admin Site</span></a>
+          </li>
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("privileges", view= "graphic", minus = ["role"]) }}'>Assing Privileges</a></li>
+{% endblock %}
+
+
+{%  block mainpart  %}
+<div class="smallcontainer" style="padding-top:50px;">
+
+	 <img class="icon" 
+		src="{{  static_path }}/images/setting.png"
+	 />
+    <div class="infoname" style="font-size: 20px;">
+	Total Number of Privileges
+    </div>
+    <div class="infodata goodnum">
+      <a href="{{ nav.link('/tables/privileges', factype=display.factype)}}">{{display.nat[0]['total']|neat_numbers}}</a>
+    </div>
+
+
+
+  </div>
+  </div>
+  
+  <div class="humblecontainer">
+  
+<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">
+	Privelege assignment form
+</div>
+<div >
+<form method="POST" class="regform">
+	{% if display.message %}
+		<h4 style="color:blue;">{{display.message}}</h4>
+	{%endif%}
+	<br><br>
+	<hr>
+	<label>Assign by user: </label>
+	<input type="hidden" name="pk" id="pk" value="">
+	<input type="text" name="telephone" id="telephone" value="" placeholder="Input user telephone">
+	<br><br>
+	<label> Assign by role: </label>
+	<select name="role"> <option value="">Select role</option>
+	{% for role in  display.roles %}<option value="{{role.indexcol}}">{{role.name}} </option> {%endfor%} 
+	</select>
+	<br><br>
+	<h4> Tick privileges: </h4>
+	<hr>
+	<br><br>
+	{% for priv in  display.privileges %} 
+		<div><input value="{{priv.indexcol}}" type="checkbox" name="privileges" /> <label>{{priv.name}}</label></div>
+		
+	{%endfor%} 
+	
+	<br><br>
+		
+	<hr>
+	<input type="button"  onClick="return PassCheck(this.form);" value="Assign" />
+  </form>
+</div>
+
+
+</div>
+
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/jquery.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/autocomplete.js"></script>
+<script type="text/javascript" src="{{ static_path }}/javascripts/facebox/facebox.js"></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+      $('a[rel*=facebox]').facebox({
+        loading_image : '{{ static_path }}/javascripts/facebox/loading.gif',
+        close_image   : '{{ static_path }}/javascripts/facebox/closelabel.gif'
+      }) 
+    })
+
+
+</script>  
+
+
+<script type="text/javascript">
+
+//CHW autocomplete
+$().ready(function() {
+//alert("OK");
+function formatItem(row) {
+		return "<tr><td width=90>" + row[0] + "</td><td width=90>" + row[1] + "</td><td width=90>" + row[2] + "</td><td width=90>" + row[3] + "</td><td width=90>" + row[4] + "</td><td width=90>" + row[5] + "</td><td width=90>" + row[6] + "</td><td width=90>" + row[7] + "</td></tr>";
+	}
+
+
+	function formatResultPhone(row) {
+                //$("#info").val(row[0] + " "+ row[1] + "(National ID: " + row[2] + ", Telephone MoH: " +row[3] + ", Village: " + row[4] + ", Cell: " +row[5] + ", Sector: " +row[6] + ", District: " +row[7]+")");
+		$("#pk").val(row[8]);
+		return row[3].replace(/(<.+?>)/gi, '');
+	}
+
+
+$("#telephone").autocomplete('/dashboards/usersearch', {
+		width: 600,
+		minChars: 9,
+		multiple: false,
+		matchContains: true,
+		formatItem: formatItem,
+		formatResult: formatResultPhone
+		});
+
+});
+
+function PassCheck(form1)
+	{
+
+	 
+	if(form1.role.value=="" && form1.telephone.value == "")
+	{
+		alert("Please select role or Get in the valid user telephone please.");
+		form1.telephone.focus();
+		return false;
+	}else if( atLeastChecked(form1.privileges) == false)
+	{	alert("Tick at least one privilege please.");
+		form1.privileges.focus();
+		return false;
+	} 
+	else
+	{	form1.submit();
+	}
+    }
+
+
+function atLeastChecked(checkboxes){
+	var checked = false;
+	for(var i=0;i<checkboxes.length;i++)
+	{
+		if(checkboxes[i].checked==true){checked = true; break;}
+	}
+
+	return checked;
+}
+
+function numChecked(checkboxes){
+	var checked = 0;
+	for(var i = 0; i<checkboxes.length; i++)
+	{
+		if(checkboxes[i].checked==true){checked += 1;}
+	}
+
+	return checked;
+}
+
+
+</script>
+{%  endblock  %}

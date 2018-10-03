@@ -1,0 +1,12 @@
+{%  extends "basicreporters.html" %}
+
+{% block position %}
+<li >&#187; <a href="{{ nav.link('/dashboards/userdash')}}">Users</a></li>
+{% if display.group %}
+<li> &#187; <a href="/tables/{{ nav.link('userdash', view= 'graphic', minus = ['group']) }}" >{{ display.group }}</a></li>
+{% endif %}
+{% endblock %}
+
+{%  block mainpart  %}
+  {%  include "basictable.html"  %}
+{%  endblock  %}

@@ -1,0 +1,27 @@
+{%  extends "novabase.html" %}
+{%  block title %} No Privilege Found {%  endblock  %}
+{%  block subtitle %} No Privilege Found {%  endblock  %}
+
+{% block menu %}
+
+{% endblock %}
+
+{%  block mainpart  %}
+
+<div class="central">
+	 <div id = "position">
+		{% if display.priv %}
+		<p> </br>You don't have privilege to view {{display.priv.name}}.</br>
+	 	</br><a href="javascript:history.back()" class="moretotal">Click here to go back the previous page</a>
+		</p>
+		{% else %}
+		<p> </br>There is no privilege found for you to view this page.</br>
+	 	</br><a href="javascript:history.back()" class="moretotal">Click here to go back the previous page</a>
+		</p>
+		{%endif%}
+	</div>
+
+<div>
+
+{% endblock %}
+

@@ -1,0 +1,79 @@
+{%  extends "novabase.html" %}
+{%  block title %}Users{%  endblock  %}
+{%  block subtitle %} Users statistics {%  endblock  %}
+
+{% block menu %}
+ 	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus=["id", "pid"]) }}'><span>Statistics</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("registeruser", minus=["id", "pid"]) }}'><span>Register</span></a>
+          </li>
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("seachupdateuser", minus=["id", "pid"]) }}'><span>Update</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("usertrail") }}'><span>Trail</span></a>
+          </li>
+          <li class="homelink">
+            <a href='/dashboards/{{ nav.link("chwupload", minus=["template"]) }}'><span>Upload Users List</span></a>
+          </li>  
+	  
+	  <li class="homelink">
+            <a href='/dashboards/{{ nav.link("groupmessage") }}'><span>Group Messages</span></a>
+          </li>
+	<li class="homelink">
+            <a href='/dashboards/{{ nav.link("adminsite") }}'><span>Admin Site</span></a>
+          </li>     
+{% endblock %}
+
+{% block position %}
+<li>&#187; <a href='/dashboards/{{ nav.link("userdash", view= "graphic", minus = ["group"]) }}'>Upload List of Users</a></li>
+
+{% endblock %}
+
+
+{%  block mainpart  %}
+
+	<div class="smallcontainer" style="padding-top:50px;">
+
+	    <img class="icon" src="{{  static_path }}/images/download.png" />
+	    <div class="moretotal" ><a href="{{ nav.link('/dashboards/chwupload', template='users' )}}">Download List Template</a></div>
+
+	</div>
+	<div class="module humblecontainer">		
+  		<div class="infoname" style="padding-left:200px; padding-top:50px; padding-bottom: 20px;">
+			Upload users
+		</div>
+		<form method="POST" class="regform" enctype="multipart/form-data" >
+		{% if display.errors %}
+			<h4 style="color:red;"> &#187; Errors found</h4>
+			<div id="Form1Layout">
+			<label><b>Row</b></label><label><b>Who</b></label><label><b>Errors</b></label></br></br>
+			{%for err in display.errors%}
+				<label>{{err.row}}</label>
+				<label>{{err.who}}</label>
+				<label>{%for e in err.errors%}{{e[1]}} &nbsp;,{%endfor%}</label></br></br>
+			{%endfor%}
+			<div>
+		{%else%}
+			{% if display.message %}
+			<h4> &#187; {{ display.message }}</h4>
+			{% endif %}
+		{% endif %}
+		<br><br>
+		
+		<label id="role">Select File: </label>
+		<br><br>
+		<input type="file" name="users_list" />
+		<br><br>
+
+		<input id="upload" type="submit"  value="Upload" />
+		<br><br>
+
+		</form>
+
+
+	</div>
+
+{%  endblock  %}
